@@ -3,10 +3,13 @@ import axios from "axios";
 import * as dotenv from "dotenv"
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import TelegramBot, { Message } from "node-telegram-bot-api";
+import clearChat from "./clear-chat";
 
 dotenv.config()
 
 export default async function auto(api: TelegramBot, event: Message, body: string) {
+
+  // TODO: To check the existence of the file to prevent errors
   if (!existsSync("data")) {
     mkdirSync("data")
   }
@@ -29,7 +32,7 @@ export default async function auto(api: TelegramBot, event: Message, body: strin
   })
 
   const { data } = await axios.post("https://openrouter.ai/api/v1/chat/completions", {
-    "model": "tencent/hy3:free",
+    "model": "openrouter/free",
     "messages": messages,
     "stream": false
   }, {
@@ -46,10 +49,16 @@ export default async function auto(api: TelegramBot, event: Message, body: strin
     "content": data.choices[0].message.content
   })
 
+  messages.shift()
+
   store[event.chat.id] = messages
 
   writeFileSync("data/dataset.json", JSON.stringify(store, null, 2), "utf-8")
 
-  console.log(extract)
-  api.sendMessage(event.chat.id, extract.message)
+  if (extract.command === "clear-chat") {
+    clearChat(api, event, extract.message)
+  } else {
+    api.sendMessage(event.chat.id, extract.message)
+  }
 }
+

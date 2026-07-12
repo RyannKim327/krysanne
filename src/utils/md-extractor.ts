@@ -1,5 +1,5 @@
 export default function mdExtractor(content: string) {
-  const enclose = /```(.*?)```/gi
+  const enclose = /```json\s(.*?)```/gi
 
   if (enclose.test(content)) {
     const body = content.match(enclose)?.[1]
@@ -8,6 +8,10 @@ export default function mdExtractor(content: string) {
   try {
     return JSON.parse(content)
   } catch (e) {
-    return content
+    return {
+      message: content,
+      command: "",
+      parameters: ""
+    }
   }
 }
