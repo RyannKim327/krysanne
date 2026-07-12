@@ -138,6 +138,12 @@ TeleAI/
 
 ---
 
+## 🔒 Privacy & Safety
+
+We take user privacy and emotional safety seriously. For details on how user data is stored, processed, and deleted, as well as our mental health crisis disclaimer, please refer to our [PRIVACY.md](PRIVACY.md).
+
+---
+
 ## 🛡️ License
 
 This project is licensed under the **Educational Community License, Version 2.0 (ECL-2.0)**. See the [LICENSE.md](LICENSE.md) file for more information.
