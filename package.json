@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "axios": "^1.18.1",
+    "biblegateway-scrape": "^0.1.2",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "node-telegram-bot-api": "^1.1.2"
