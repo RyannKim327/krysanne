@@ -1,13 +1,13 @@
-Project: Tele-AI
-Copyright (c) 2026 Master Piece of Paper (formerly MPOP Reverse II)
-Primary Author: Ryann Kim M. Sesgundo
+### Project: Tele-AI
+### Copyright (c) 2026 Master Piece of Paper (formerly MPOP Reverse II)
+### Primary Author: Ryann Kim M. Sesgundo
 
-Licensed under the Educational Community License, Version 2.0 (the "License");
+> Licensed under the Educational Community License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License. You may
 obtain a copy of the License at
-
-    https://opensource.org/licenses/ECL-2.0
-
+```
+https://opensource.org/licenses/ECL-2.0
+```
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
