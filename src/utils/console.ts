@@ -1,6 +1,8 @@
 export default function log(from: string, msg: string, status = "i") {
   let color = 36;
+
   status = status[0].toLowerCase();
+
   switch (status) {
     case "w":
       color = 33;
@@ -18,9 +20,11 @@ export default function log(from: string, msg: string, status = "i") {
       color = 36;
       status = "INFO";
   }
+
   if (typeof msg === "object") {
     msg = JSON.stringify(msg, null, 2);
   }
+
   console.log(
     `\x1b[${color}m${status} [${from
       .replace(/\W/gi, " ")

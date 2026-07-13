@@ -6,7 +6,9 @@ export default async function ultiguitar(api: TelegramBot, event: Message, body:
   const ug = guitar()
   const search = await ug.search(body.parameter, "", category.CHORDS)
   const chords = await ug.fetch(search.responses[0])
+
   api.sendMessage(event.chat.id, `${chords.response}`, {
     message_thread_id: event.reply_to_message?.message_thread_id
   })
+
 }

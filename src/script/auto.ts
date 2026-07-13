@@ -28,13 +28,10 @@ export default async function auto(api: TelegramBot, event: Message, body: strin
   }
 
   if (!existsSync("data/dataset.json")) {
-    // writeFileSync("data/dataset.json", "", "utf-8")
     encrypt({}, code, {
       saveTo: "data/dataset.json"
     })
   }
-
-  // const store = JSON.parse(readFileSync("data/dataset.json", "utf-8"))
 
   const store = decrypt("data/dataset.json", code)
 
@@ -89,9 +86,6 @@ export default async function auto(api: TelegramBot, event: Message, body: strin
     saveTo: "data/dataset.json"
   })
 
-  // writeFileSync("data/dataset.json", JSON.stringify(store, null, 2), "utf-8")
-
-
   api.sendChatAction(event.chat.id, "typing", {
     message_thread_id: event.reply_to_message?.message_thread_id
   })
@@ -99,6 +93,7 @@ export default async function auto(api: TelegramBot, event: Message, body: strin
   // INFO: I let this log for debugging purposes
   console.log(extract)
 
+  // TODO: This is just temporary, I will create a better algorithm for this part
   if (extract.command === "clear-chat") {
     clearChat(api, event, extract)
   } else if (extract.command === "verse") {
