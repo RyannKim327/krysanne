@@ -8,10 +8,13 @@ import bible from "./verse";
 import { aiResponse } from "@/interface";
 import ultiguitar from "./guitar";
 import newThread from "./new-thread";
+import { decrypt, encrypt } from "json-enc-dec";
 
 dotenv.config()
 
 export default async function auto(api: TelegramBot, event: Message, body: string) {
+
+  let code = process.env.BOT_CODE ?? "default"
 
   let user = event.from?.id.toString() || event.chat.id.toString()
 
@@ -23,11 +26,18 @@ export default async function auto(api: TelegramBot, event: Message, body: strin
   if (!existsSync("data")) {
     mkdirSync("data")
   }
+
   if (!existsSync("data/dataset.json")) {
-    writeFileSync("data/dataset.json", "{}", "utf-8")
+    // writeFileSync("data/dataset.json", "", "utf-8")
+    encrypt({}, code, {
+      saveTo: "data/dataset.json"
+    })
   }
 
-  const store = JSON.parse(readFileSync("data/dataset.json", "utf-8"))
+  // const store = JSON.parse(readFileSync("data/dataset.json", "utf-8"))
+
+  const store = decrypt("data/dataset.json", code)
+
   const messages = [
     {
       "role": "system",
@@ -75,7 +85,12 @@ export default async function auto(api: TelegramBot, event: Message, body: strin
   }
   store[user] = messages
 
-  writeFileSync("data/dataset.json", JSON.stringify(store, null, 2), "utf-8")
+  encrypt(store, code, {
+    saveTo: "data/dataset.json"
+  })
+
+  // writeFileSync("data/dataset.json", JSON.stringify(store, null, 2), "utf-8")
+
 
   api.sendChatAction(event.chat.id, "typing", {
     message_thread_id: event.reply_to_message?.message_thread_id
