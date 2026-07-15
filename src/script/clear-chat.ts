@@ -26,11 +26,11 @@ export default async function clearChat(api: TelegramBot, event: Message, body: 
 
   delete store[user]
 
-  encrypt(store, code, {
-    saveTo: "data/dataset.json"
-  })
+  // encrypt(store, code, {
+  //   saveTo: "data/dataset.json"
+  // })
 
-  // writeFileSync("data/dataset.json", JSON.stringify(store, null, 2), "utf-8")
+  writeFileSync("data/dataset.json", JSON.stringify(store, null, 2), "utf-8")
   api.deleteForumTopic(event.chat.id, event.message_thread_id as number)
 
   const message = await api.sendMessage(event.chat.id, `The thread ${event.reply_to_message?.forum_topic_created?.name} is now deleted`)

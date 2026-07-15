@@ -12,7 +12,7 @@ export default async function imageGenerator(api: TelegramBot, event: Message, b
   })
 
   const { data } = await axios.post("https://api.lumenfall.ai/openai/v1/images/generations", {
-    "model": "seedream-4.5",
+    "model": "gemini-3.1-flash-lite-image",
     "prompt": body.parameter,
     "size": "1024x1024"
   }, {
