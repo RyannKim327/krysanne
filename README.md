@@ -14,13 +14,15 @@
 
 > [!IMPORTANT]
 > **Disclaimer:** TeleAI (Krysanne) is an AI companion meant to lend a supportive ear and offer temporary comfort. It is **not** designed to replace physical human touch, real relationships, or professional help/counseling for emotional distress and mental health problems.
+> 
+> **Crisis Support Hotline (Philippines):** If you are experiencing thoughts of self-harm or suicide, please immediately contact **(02) 8804-4673** (Hopeline Philippines; Homepage: [findahelpline.com/organizations/hopeline](https://findahelpline.com/organizations/hopeline)) or visit [findahelpline.com/countries/ph](https://findahelpline.com/countries/ph) for more hotlines. If you are in the US or Canada, call or text **988**. Professional help is always available, and you are not alone.
 
 ---
 
 ## 🌟 Key Features
 
 *   **Empathetic Listening:** Engineered to act as a supportive companion, offering active listening and a compassionate outlet for users.
-*   **Continuous Chat Memory:** Stores conversational context securely per Telegram `chat.id` in a local dataset (`data/dataset.json`) to enable fluid, context-aware dialogues.
+*   **Continuous Chat Memory:** Retains conversational context securely per Telegram `chat.id` in a temporary local data store (which resets when the server is restarted) to enable continuous, context-aware dialogues.
 *   **Dynamic Command Routing:** Commands generated in structured AI JSON responses are dynamically matched, imported, and executed from modular scripts in the `src/script/` directory.
 *   **Extensible Built-in Commands:**
     *   `clear-chat`: Resets/clears the conversational history for a fresh start.
@@ -158,7 +160,12 @@ TeleAI/
 
 ## 🔒 Privacy & Safety
 
-We take user privacy and emotional safety seriously. TeleAI (Krysanne) is not a substitute for professional mental health support or physical human connection, but rather an AI companion to provide a temporary, listening hand during difficult moments. For details on how user data is stored, processed, and deleted, as well as our full mental health crisis disclaimer, please refer to our [PRIVACY.md](PRIVACY.md).
+We take user privacy and emotional safety seriously. TeleAI (Krysanne) is not a substitute for professional mental health support or physical human connection, but rather an AI companion to provide a temporary, listening hand during difficult moments. 
+
+*   **Crisis Hotline:** If you are experiencing thoughts of self-harm or suicide, please call **(02) 8804-4673** (Hopeline Philippines; Homepage: [findahelpline.com/organizations/hopeline](https://findahelpline.com/organizations/hopeline)) or visit [findahelpline.com/countries/ph](https://findahelpline.com/countries/ph) for local hotlines.
+*   **Privacy & Data Storage:** Conversational data is used strictly for continuous communication and is only kept in the local data store of the platform, which completely resets when the server is restarted.
+
+For full details on data handling and mental health crisis disclaimers, please refer to our [PRIVACY.md](PRIVACY.md).
 
 ---
 

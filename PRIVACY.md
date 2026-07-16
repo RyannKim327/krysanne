@@ -1,6 +1,6 @@
 # Privacy Policy & Support Disclaimer
 
-**Last Updated:** July 12, 2026
+**Last Updated:** July 16, 2026
 
 Welcome to **TeleAI** (Krysanne), an empathetic AI Telegram companion designed to offer listening, conversation, and supportive presence. Your privacy and trust are of utmost importance, especially given our mission to provide comfort, combat loneliness, and offer a safe space for expression.
 
@@ -13,15 +13,21 @@ Please read this Privacy Policy carefully to understand how your data is handled
 **TeleAI (Krysanne) is an AI companion chatbot. It is NOT a licensed medical, mental health, or psychiatric professional service.** 
 
 *   **Not a Replacement for Professional Help:** Krysanne cannot diagnose, treat, or prevent mental health conditions, and cannot provide clinical crisis intervention.
-*   **Emergency Contact:** If you are experiencing a severe mental health crisis, self-harm thoughts, or suicidal thoughts, please reach out immediately to professional hotlines, emergency services, or local crisis centers (e.g., 988 Suicide & Crisis Lifeline in the US, or your local national equivalent). You are not alone, and professional human help is available.
+*   **Emergency Contact:** If you are experiencing a severe mental health crisis, self-harm thoughts, or suicidal thoughts, please reach out immediately to professional hotlines, emergency services, or local crisis centers:
+    *   **Philippines Hotline (Hopeline Philippines):** Call **(02) 8804-4673** (Homepage: [findahelpline.com/organizations/hopeline](https://findahelpline.com/organizations/hopeline)).
+    *   **More Hotlines in the Philippines:** [findahelpline.com/countries/ph](https://findahelpline.com/countries/ph).
+    *   **United States / Canada:** Call or text **988** (Suicide & Crisis Lifeline).
+    *   **Other Countries:** Please contact your local national equivalent or visit [findahelpline.com](https://findahelpline.com) to find local crisis support.
+    You are not alone, and professional human help is available.
 
 ---
 
 ## 🔒 2. Information We Collect
 
-To provide a context-aware and fluid conversation, TeleAI collects and stores the following information:
+To provide a context-aware and fluid conversation, TeleAI collects and holds conversational information. **The data gathered is used strictly for continuous communication.** The data is not stored in any external platform, and resides only within the local data store of the hosting platform, which completely resets when the server is restarted.
 
-1.  **Telegram Identifiers:** Your Telegram `chat.id`, `user.id`, and thread identifier (if using group topics) to associate conversation history with your chat session.
+We collect:
+1.  **Telegram Identifiers:** Your Telegram `chat.id`, `user.id`, and thread identifier (if using group topics) to associate conversation history with your current chat session.
 2.  **Conversational History:** The text of messages you send to Krysanne, along with the assistant's replies.
 
 *No other personal data (such as your real name, phone number, location, or payment details) is requested, processed, or stored by TeleAI.*
@@ -30,16 +36,16 @@ To provide a context-aware and fluid conversation, TeleAI collects and stores th
 
 ## ⚙️ 3. How We Use and Process Your Data
 
-Your data is processed only for the following purposes:
-*   **Conversational Continuity (Context):** Storing previous messages allows Krysanne to remember what was said earlier in the conversation, facilitating natural and supportive dialogue.
-*   **AI Inference:** Messages are sent to **OpenRouter AI** API (default model: `tencent/hy3:free` or equivalent) to generate empathetic responses.
+Your data is processed and used strictly for the following purposes:
+*   **Conversational Continuity (Context):** Storing previous messages in the platform's temporary local data store allows Krysanne to remember what was said earlier, facilitating natural, continuous, and supportive dialogue.
+*   **AI Inference:** Messages are sent securely to the **OpenRouter AI** API (default model: `tencent/hy3:free` or equivalent) to generate empathetic responses, but are not stored or retained permanently on any other external platform.
 
 ---
 
 ## 💾 4. Data Storage and Retention
 
-*   **Local Storage:** Conversation histories and Telegram identifiers are stored locally on the hosting server in a structured file (`data/dataset.json`).
-*   **No Centralized Database:** We do not upload your chats to any centralized cloud database, profiling engine, or advertising network.
+*   **Local Storage only (Ephemeral):** Conversation histories and Telegram identifiers are stored locally on the hosting server in a temporary file (`data/dataset.json`). This local data store is entirely ephemeral and **resets when the server is restarted**.
+*   **No Centralized Database:** We do not upload or save your chats to any centralized cloud database, profiling engine, or advertising network.
 *   **User-Controlled Erasure:** You have complete control over your data.
     *   You can delete your history at any time by triggering the `clear-chat` command (e.g., by asking the bot to reset or clear the chat history).
     *   This instantly removes your user entry and history from `data/dataset.json` and, if applicable, deletes the Telegram forum thread.

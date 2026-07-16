@@ -1,6 +1,6 @@
 <section class="card" id="privacy-main-card">
     <h1 id="privacy-title">Privacy Policy & Support Disclaimer</h1>
-    <p><em>Last Updated: July 12, 2026</em></p>
+    <p><em>Last Updated: July 16, 2026</em></p>
     
     <p>
         Welcome to <strong>TeleAI</strong> (Krysanne), an empathetic AI Telegram companion designed to offer listening, conversation, and supportive presence. Your privacy and trust are of utmost importance, especially given our mission to provide comfort, combat loneliness, and offer a safe space for expression.
@@ -15,28 +15,37 @@
         </p>
         <ul style="margin-top: 0.8rem; margin-bottom: 0;">
             <li><strong>Not a Replacement:</strong> Krysanne cannot diagnose, treat, prevent mental health conditions, or provide clinical crisis intervention.</li>
-            <li><strong>Emergency Hotlines:</strong> If you are experiencing thoughts of self-harm or suicide, please immediately contact emergency services or a crisis line (e.g. <strong>988</strong> in the US/Canada, or your local equivalent). Professional human help is available and you are not alone.</li>
+            <li><strong>Emergency Hotlines:</strong> If you are experiencing thoughts of self-harm or suicide, please immediately contact emergency services or a crisis line:
+                <ul>
+                    <li><strong>Philippines Hotline (Hopeline Philippines):</strong> Call <strong>(02) 8804-4673</strong> (Homepage: <a href="https://findahelpline.com/organizations/hopeline" target="_blank">findahelpline.com/organizations/hopeline</a>)</li>
+                    <li><strong>More Hotlines in the Philippines:</strong> <a href="https://findahelpline.com/countries/ph" target="_blank">findahelpline.com/countries/ph</a></li>
+                    <li><strong>US & Canada:</strong> Call or text <strong>988</strong></li>
+                    <li><strong>Other Countries:</strong> Please reach out to your local equivalent or visit <a href="https://findahelpline.com/" target="_blank">findahelpline.com</a> to find local crisis support.</li>
+                </ul>
+                Professional human help is available and you are not alone.
+            </li>
         </ul>
     </div>
 
     <h2 id="privacy-collect-title"><i class="fa-solid fa-database"></i> 2. Information We Collect</h2>
-    <p>To provide a context-aware and fluid conversation, TeleAI collects and stores the following information:</p>
+    <p>To provide a context-aware and fluid conversation, TeleAI collects and holds conversational information. <strong>The data gathered is used strictly for continuous communication.</strong> The data is not stored in any external platform, and resides only within the local data store of the hosting platform, which completely resets when the server is restarted.</p>
+    <p>We collect:</p>
     <ol>
-        <li><strong>Telegram Identifiers:</strong> Your Telegram <code>chat.id</code>, <code>user.id</code>, and thread identifiers to associate conversational history with your session.</li>
+        <li><strong>Telegram Identifiers:</strong> Your Telegram <code>chat.id</code>, <code>user.id</code>, and thread identifiers to associate conversational history with your current session.</li>
         <li><strong>Conversational History:</strong> The text of messages you send to Krysanne, along with the assistant's replies.</li>
     </ol>
     <p><em>Note: No other personal details (such as your real name, phone number, location, or payment details) are ever requested, processed, or stored by TeleAI.</em></p>
 
     <h2 id="privacy-use-title"><i class="fa-solid fa-gears"></i> 3. How We Process Your Data</h2>
     <ul>
-        <li><strong>Conversational Continuity:</strong> Storing history enables Krysanne to remember previous parts of your dialogue, facilitating supportive and continuous conversation.</li>
-        <li><strong>AI Inference:</strong> Messages are sent securely to the <strong>OpenRouter AI</strong> API to generate the assistant's empathetic responses.</li>
+        <li><strong>Conversational Continuity:</strong> Storing history in the platform's temporary local data store enables Krysanne to remember previous parts of your dialogue, facilitating supportive and continuous conversation.</li>
+        <li><strong>AI Inference:</strong> Messages are sent securely to the <strong>OpenRouter AI</strong> API to generate the assistant's empathetic responses, but are not stored or retained permanently on any other external platform.</li>
     </ul>
 
     <h2 id="privacy-storage-title"><i class="fa-solid fa-hard-drive"></i> 4. Data Storage & Retention</h2>
     <ul>
-        <li><strong>Local Storage Only:</strong> Conversation histories and Telegram IDs are stored locally on the hosting server in a structured file (<code>data/dataset.json</code>).</li>
-        <li><strong>No Cloud Databases:</strong> We do not upload your chats to any centralized cloud database, profiling engine, or advertising networks.</li>
+        <li><strong>Local Storage Only (Ephemeral):</strong> Conversation histories and Telegram IDs are stored locally on the hosting server in a temporary file (<code>data/dataset.json</code>). This local data store is entirely ephemeral and <strong>resets when the server is restarted</strong>.</li>
+        <li><strong>No Cloud Databases:</strong> We do not upload or save your chats to any centralized cloud database, profiling engine, or advertising networks.</li>
         <li><strong>User-Controlled Erasure:</strong> You have complete control. You can wipe your history at any time by asking the bot to reset or triggering the <code>clear-chat</code> command. This instantly erases all your logs from the server.</li>
     </ul>
 
