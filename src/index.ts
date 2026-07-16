@@ -1,8 +1,9 @@
-import TelegramBot, { Message } from "node-telegram-bot-api";
+import TelegramBot, { EventMetadata } from "node-telegram-bot-api";
 import * as dotenv from "dotenv"
 import log from "./utils/console";
 import express, { Express, Request, Response } from "express"
 import core from "./core";
+import { EventInterface } from "./interface";
 
 function main() {
   dotenv.config()
@@ -61,9 +62,27 @@ function main() {
 
     log("Welcome", "Server Loaded and Running")
 
-    api.onText(/([\w\W]+)/gi, (message: Message, regex: RegExpExecArray | null) => {
-      core(api, message, regex)
+    api.on("message", (message: EventInterface, metadata: EventMetadata) => {
+      // TODO: To include the metadata in the event for single fetch
+      message['metadata'] = metadata
+
+      // TODO: To filter message with non actions
+      const metatypes = [
+        "text", "animation", "audio", "document", "photo", "video"
+      ]
+
+      if (message.caption) {
+        message.text = message.caption
+      }
+
+      if (metatypes.includes(metadata.type ?? "")) {
+        core(api, message, message.text ?? "")
+      }
     })
+
+    // api.onText(/([\w\W]+)/gi, (message: Message, regex: RegExpExecArray | null) => {
+    //   core(api, message, regex)
+    // })
 
   } catch (e: any) {
     log("Main Catch", e.toString(), "e")

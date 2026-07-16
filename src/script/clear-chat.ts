@@ -1,9 +1,9 @@
-import { aiResponse } from "@/interface";
+import { aiResponse, EventInterface } from "@/interface";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import { decrypt, encrypt } from "json-enc-dec";
-import TelegramBot, { Message } from "node-telegram-bot-api";
+import TelegramBot from "node-telegram-bot-api";
 
-export default async function script(api: TelegramBot, event: Message, body: aiResponse) {
+export default async function script(api: TelegramBot, event: EventInterface, body: aiResponse) {
   let user = event.from?.id.toString() || event.chat.id.toString()
   let code = process.env.BOT_CODE ?? "default"
 

@@ -2,12 +2,12 @@ import mdExtractor from "@/utils/md-extractor";
 import axios from "axios";
 import * as dotenv from "dotenv"
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
-import TelegramBot, { Message } from "node-telegram-bot-api";
-import { aiResponse } from "@/interface";
+import TelegramBot from "node-telegram-bot-api";
+import { aiResponse, EventInterface } from "@/interface";
 
 dotenv.config()
 
-export default async function auto(api: TelegramBot, event: Message, body: string) {
+export default async function auto(api: TelegramBot, event: EventInterface, body: string) {
 
   let code = process.env.BOT_CODE ?? "default"
 

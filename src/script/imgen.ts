@@ -1,12 +1,12 @@
 import * as dotenv from "dotenv"
-import { aiResponse } from "@/interface";
+import { aiResponse, EventInterface } from "@/interface";
 import axios from "axios";
-import TelegramBot, { Message } from "node-telegram-bot-api";
+import TelegramBot from "node-telegram-bot-api";
 
 dotenv.config()
 
 
-export default async function script(api: TelegramBot, event: Message, body: aiResponse) {
+export default async function script(api: TelegramBot, event: EventInterface, body: aiResponse) {
 
   api.sendMessage(event.chat.id, body.message, {
     message_thread_id: event.reply_to_message?.message_thread_id

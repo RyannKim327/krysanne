@@ -1,8 +1,8 @@
-import { aiResponse } from "@/interface";
+import { aiResponse, EventInterface } from "@/interface";
 import { verse } from "biblegateway-scrape";
-import TelegramBot, { Message } from "node-telegram-bot-api";
+import TelegramBot from "node-telegram-bot-api";
 
-export default async function script(api: TelegramBot, event: Message, body: aiResponse) {
+export default async function script(api: TelegramBot, event: EventInterface, body: aiResponse) {
   const response = await verse(body.parameter)
 
   api.sendMessage(
