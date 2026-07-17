@@ -85,9 +85,11 @@ export default async function auto(api: TelegramBot, event: EventInterface, body
 
   writeFileSync("data/dataset.json", JSON.stringify(store, null, 2), "utf-8")
 
-  api.sendChatAction(event.chat.id, "typing", {
-    message_thread_id: event.reply_to_message?.message_thread_id
-  })
+  try {
+    await api.sendChatAction(event.chat.id, "typing", {
+      message_thread_id: event.reply_to_message?.message_thread_id
+    })
+  } catch (e) { }
 
   // INFO: I let this log for debugging purposes
   // console.log(extract)
