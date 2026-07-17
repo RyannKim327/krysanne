@@ -288,6 +288,22 @@ Example:
 }
 ```
 
+### `weather`
+
+Retrieves the current weather information for a specified location.
+
+Parameter: `URL-encoded location name` (e.g., `Lucena%20City`)
+
+Example:
+
+```json
+{
+  "message": "Checking the weather for Lucena City.",
+  "command": "weather",
+  "parameter": "Lucena%20City"
+}
+```
+
 ### `imgen`
 
 Generates an image using an AI image generation model.
@@ -554,6 +570,16 @@ User: “I’m feeling really stressed today.”
   "message": "Fetching the guitar chords.",
   "command": "guitar",
   "parameter": "Perfect - Ed Sheeran"
+}
+```
+
+### Weather
+
+```json
+{
+  "message": "Checking the weather for Lucena City.",
+  "command": "weather",
+  "parameter": "Lucena%20City"
 }
 ```
 
