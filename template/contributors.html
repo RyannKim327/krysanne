@@ -1,97 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body {
-            background: transparent !important;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            padding: 1rem 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-    <main class="container">
-        <section class="card" id="contributors-main-card">
-            <h1 id="contributors-title">Project Contributors</h1>
-            <p>
-                Thank you for your interest in contributing to <strong>Krysanne</strong>! This project is driven by a profound mission: <strong>to provide a friend, alleviate isolation, and help prevent mental health crises.</strong> Your contributions play a vital role in realizing this vision.
-            </p>
+<body class="template-body">
+  <div class="main doc-page">
+    <div class="doc-container">
+      <div class="doc-header">
+        <span class="hero-badge">Community</span>
+        <h1 class="doc-title">Project Contributors</h1>
+        <p class="doc-meta">Meet the minds behind Krysanne</p>
+      </div>
 
-            <h2 id="lead-maintainer-title">👑 Lead Author & Visionary</h2>
-            <div class="contributors-grid" id="maintainers-grid-container">
-                <div class="contributor-card" id="contributor-ryann">
-                    <div class="contributor-avatar">RK</div>
-                    <div class="contributor-info">
-                        <h4>Ryann Kim M. Sesgundo</h4>
-                        <p>Core Creator, Lead Architect & Maintainer</p>
-                        <p><a href="https://github.com/RyannKim327/krysanne" target="_blank"><i class="fa-brands fa-github"></i> GitHub Profile</a></p>
-                    </div>
-                </div>
+      <div class="doc-content">
+        <p>Thank you for your interest in contributing to <strong>Krysanne</strong>! This project is driven by a profound mission: <strong>to provide a friend, alleviate isolation, and help prevent mental health crises.</strong> Your contributions play a vital role in realizing this vision.</p>
+
+        <h2>👑 Lead Author & Visionary</h2>
+        <div class="contributor-list">
+          <div class="contributor-card">
+            <div class="contributor-info">
+              <h3>Ryann Kim M. Sesgundo</h3>
+              <p>Master Piece of Paper (formerly MPOP Reverse II)</p>
+              <p style="font-size: 0.85rem; margin-top: 0.25rem;">Core Creator, Lead Architect, and Maintainer.</p>
             </div>
+            <a href="https://github.com/RyannKim327" target="_blank" class="contributor-github">
+              <i class="fa-brands fa-github"></i> GitHub Profile
+            </a>
+          </div>
+        </div>
 
-            <h2 id="contribute-guidelines-title">🤝 How to Contribute</h2>
-            <p>
-                We welcome and encourage community contributions, whether you're fixing bugs, adding new features, improving the assistant prompt, or updating documentation.
-            </p>
+        <hr>
 
-            <h3 id="standards-title">📜 Code of Conduct & Standards</h3>
-            <ol>
-                <li>
-                    <strong>Keep it Compassionate:</strong> Krysanne is built to support people in need. All changes to prompts (<code>src/prompt.md</code>) and conversational flows must maintain a warm, safe, supportive, and non-judgmental tone.
-                </li>
-                <li>
-                    <strong>Safety First:</strong> Ensure that no user data, private chats, API keys, or credentials are ever logged, cached insecurely, or exposed to external servers except through the secure OpenRouter API endpoint.
-                </li>
-                <li>
-                    <strong>Strict Typing:</strong> The codebase is written in TypeScript. Avoid using the <code>any</code> keyword or bypassing TypeScript compilation warnings.
-                </li>
-                <li>
-                    <strong>Modular Design:</strong> Follow the existing project architecture (routing events through <code>core.ts</code>, creating modular scripts in <code>src/script/</code>, and parsing markdown commands with utility functions).
-                </li>
-            </ol>
+        <h2>🤝 How to Contribute</h2>
+        <p>We welcome and encourage community contributions, whether you're fixing bugs, adding new features, improving the prompt, or updating documentation.</p>
 
-            <h3 id="getting-started-title">🚀 Getting Started</h3>
-            <ul>
-                <li><strong>Fork & Clone:</strong> Fork the repository on GitHub and clone your fork locally.</li>
-                <li><strong>Create a Branch:</strong> Create a branch detailing the feature or fix (e.g., <code>feat/custom-empathetic-responses</code>).</li>
-                <li><strong>Implement & Test:</strong> Make your changes and ensure that compilation and syntax are correct.</li>
-                <li><strong>Format Code:</strong> Adhere to existing spacing and code conventions.</li>
-                <li><strong>Submit a Pull Request:</strong> Open a detailed Pull Request explaining what was changed, why it is beneficial, and how it aligns with the project’s mission.</li>
-            </ul>
+        <h3>📜 Code of Conduct & Standards</h3>
+        <p>To ensure a high-quality codebase and a respectful community:</p>
+        <ol>
+          <li><strong>Keep it Compassionate:</strong> Krysanne is built to support people in need. All changes to prompts (<code>src/prompt.md</code>) and conversational flows must maintain a warm, safe, supportive, and non-judgmental tone.</li>
+          <li><strong>Safety First:</strong> Ensure that no user data, private chats, API keys, or credentials are ever logged, cached insecurely, or exposed to external servers except through the secure OpenRouter API endpoint.</li>
+          <li><strong>Strict Typing:</strong> The codebase is written in TypeScript. Avoid using the <code>any</code> keyword or bypassing TypeScript compilation warnings.</li>
+          <li><strong>Modular Design:</strong> Follow the existing project architecture (routing events through <code>core.ts</code>, creating modular scripts in <code>src/script/</code>, and parsing markdown commands with utility functions).</li>
+        </ol>
 
-            <h2 id="recognition-title">📜 Recognition</h2>
-            <p>
-                All contributions—no matter how small—will be recognized here. If you contribute code, prompts, translation, or document improvements, feel free to add your name to the list below in your Pull Request!
-            </p>
+        <h3>🚀 Getting Started with Contributions</h3>
+        <ol>
+          <li><strong>Fork & Clone:</strong> Fork the repository on GitHub and clone your fork locally.</li>
+          <li><strong>Create a Branch:</strong> Create a branch detailing the feature or fix (e.g., <code>feat/custom-empathetic-responses</code>).</li>
+          <li><strong>Implement & Test:</strong> Make your changes and ensure that compilation and syntax are correct.</li>
+          <li><strong>Format Code:</strong> Adhere to existing spacing and code conventions.</li>
+          <li><strong>Submit a Pull Request:</strong> Open a detailed Pull Request explaining what was changed, why it is beneficial, and how it aligns with the project’s mission.</li>
+        </ol>
 
-            <h3 id="community-contribs-title">Community Contributors</h3>
-            <div class="contributors-grid" id="community-grid-container">
-                <div class="contributor-card" id="contributor-placeholder">
-                    <div class="contributor-avatar"><i class="fa-solid fa-user-plus"></i></div>
-                    <div class="contributor-info">
-                        <h4>Your Name Here</h4>
-                        <p>Join the team! Submit a PR to add your name.</p>
-                        <p><a href="https://github.com/RyannKim327/krysanne/pulls" target="_blank"><i class="fa-solid fa-code-pull-request"></i> Submit PR</a></p>
-                    </div>
-                </div>
-            </div>
+        <hr>
 
-            <div class="info-box" style="border-left-color: var(--accent-purple); background: rgba(139, 92, 246, 0.08);" id="contributor-quote-box">
-                <p style="font-style: italic; font-size: 1.1rem; color: var(--text-primary); text-align: center; margin-bottom: 0;">
-                    “No one is useless in this world who lightens the burdens of it for another.”
-                </p>
-                <p style="text-align: center; color: var(--text-secondary); margin-top: 0.5rem; margin-bottom: 0; font-size: 0.95rem;">
-                    — Charles Dickens
-                </p>
-            </div>
-        </section>
-    </main>
+        <h2>📜 Recognition</h2>
+        <p>All contributions—no matter how small—will be recognized here. If you contribute code, prompts, translation, or document improvements, feel free to add your name to the list below in your Pull Request!</p>
+
+        <h3>Community Contributors</h3>
+        <ul>
+          <li><em>Your Name / GitHub Profile — Brief description of what you contributed</em></li>
+        </ul>
+
+        <blockquote>
+          <p>“No one is useless in this world who lightens the burdens of it for another.”</p>
+          <cite>— Charles Dickens</cite>
+        </blockquote>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

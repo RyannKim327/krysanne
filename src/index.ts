@@ -34,6 +34,7 @@ function main() {
 
     // Serve static files from the template directory under the /template path
     app.use("/template", express.static(path.join(process.cwd(), "template")))
+    app.use("/assets", express.static(path.join(process.cwd(), "assets")))
 
     // Route mappings for clean URLs in the SPA (all serve the root index.html)
     const sendIndex = (req: Request, res: Response) => {

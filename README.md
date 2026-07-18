@@ -5,7 +5,7 @@
 [![Language: TypeScript](https://img.shields.io/badge/Language-TypeScript-blue.svg)](https://www.typescriptlang.org/)
 [![wakatime](https://wakatime.com/badge/github/RyannKim327/krysanne.svg)](https://wakatime.com/badge/github/RyannKim327/krysanne)
 
-![Krysanne Banner](template/krysanne_banner.jpg)
+![Krysanne Banner](assets/banner.jpg)
 
 > **"What I aim is to give people a friend, to prevent suicide cases. To call someone who listen to them."**
 > — *Krysanne Mission Statement*
@@ -44,6 +44,18 @@
 *   **API Client:** [Axios](https://github.com/axios/axios) (to communicate with OpenRouter)
 *   **Bible Scraping:** [biblegateway-scrape](https://www.npmjs.com/package/biblegateway-scrape) (to extract verses on demand)
 *   **Guitar Chords:** [ultimate-guitar](https://www.npmjs.com/package/ultimate-guitar) (to retrieve songs and chords)
+
+---
+
+## 🎨 Web Design Philosophy
+
+The companion platform frontend features a sleek, premium, and highly-focused design system that reflects Krysanne's comforting and gentle persona:
+
+*   **Floating Capsule Navigation:** The header floats centered at the top of the page, adopting a Tailwind-style `rounded-full` layout. This ensures a clean, isolated, and floating web component aesthetic.
+*   **Dynamic Color States:**
+    *   **Muted Translucent State:** When resting at the top of the page, the header features a dark, semi-transparent backdrop blur (`rgba(10, 10, 10, 0.6)`) to stay unobtrusive and integrate with the dark-themed background.
+    *   **Solid White State:** Upon scrolling the window down or opening the mobile drawer menu, the header transitions smoothly to solid white with dark navigation links and icons, offering high contrast and focused usability.
+*   **Compassionate Visual Imagery:** The user interface features soft navy, violet, and starlight-white accents with cosmic/holographic glowing spheres to instill a sense of calm, technology, and support.
 
 ---
 

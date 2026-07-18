@@ -1,216 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Krysanne - An empathetic, always-on AI companion hosted on Telegram designed to listen, comfort, and support you.">
-    <title>Krysanne — Compassionate AI Telegram Companion</title>
-    <!-- Fonts & Icons -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Krysanne - Compassionate AI Companion</title>
+    <link href="assets/style.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Custom StyleSheet -->
-    <link rel="stylesheet" href="template/style.css">
-    <style>
-      body{
-        width: 100dvw;
-        height: 100dvh;
-        overflow-x: hidden !important;
-      }
-      
-      #app-content {
-        width: 100%;
-        border: none;
-        overflow: hidden;
-        display: block;
-        transition: opacity 0.2s ease;
-      }
-      .fade-out {
-        opacity: 0;
-      }
-    </style>
-</head>
-<body>
-    <div class="nav-overlay" id="nav-overlay"></div>
+  </head>
+  <body>
     <header>
-        <div class="container navbar">
-            <a href="#home" class="logo" id="logo-main">
-                <i class="fa-solid fa-robot"></i> Krysanne
-            </a>
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span class="hamburger-box">
-                    <span class="hamburger-inner"></span>
-                </span>
-            </button>
-            <nav aria-label="Main Navigation" id="nav-menu">
-                <ul class="nav-links">
-                    <li>
-                      <a href="#home" class="nav-link" id="nav-home"><i class="fa-solid fa-house"></i> Home</a>
-                    </li>
-                    <li><a href="#readme" class="nav-link" id="nav-readme"><i class="fa-solid fa-book-open"></i> Readme</a></li>
-                    <li><a href="#privacy" class="nav-link" id="nav-privacy"><i class="fa-solid fa-shield-halved"></i> Privacy</a></li>
-                    <li><a href="#contributors" class="nav-link" id="nav-contributors"><i class="fa-solid fa-users"></i> Contributors</a></li>
-                    <li><a href="#license" class="nav-link" id="nav-license"><i class="fa-solid fa-gavel"></i> License</a></li>
-                </ul>
-            </nav>
-        </div>
+      <a href="#home" class="logo">
+        <i class="fa-solid fa-robot"></i> Krysanne
+      </a>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+
+      <nav id="nav-menu">
+        <ul class="nav-links">
+          <li class="nav-link" id="nav-home">
+            <a href="#home">Home</a>
+          </li>
+          <li class="nav-link" id="nav-readme">
+            <a href="#readme">Readme</a>
+          </li>
+          <li class="nav-link" id="nav-privacy">
+            <a href="#privacy">Privacy</a>
+          </li>
+          <li class="nav-link" id="nav-contributors">
+            <a href="#contributors">Contributors</a>
+          </li>
+          <li class="nav-link" id="nav-license">
+            <a href="#license">License</a>
+          </li>
+        </ul>
+      </nav>
     </header>
 
-    <main class="container">
-        <!-- SPA Viewport -->
-        <object id="app-content" type="text/html" data="template/home.html"></object>
+    <div id="nav-overlay" class="nav-overlay"></div>
+
+    <main id="app-content">
+      <object data="template/home.html" type="text/html"></object>
     </main>
 
     <footer>
-        <div class="container footer-content">
-            <div class="footer-text" id="footer-text-copyright">
-                &copy; 2026 Master Piece of Paper. Released under the Educational Community License 2.0 (ECL-2.0).
-            </div>
-            <ul class="footer-links" id="footer-links-list">
-                <li><a href="#readme">Readme</a></li>
-                <li><a href="#privacy">Privacy Policy</a></li>
-                <li><a href="#contributors">Contributors</a></li>
-                <li><a href="#license">License</a></li>
-            </ul>
-        </div>
+      <div class="footer-text" id="footer-text-copyright">
+        &copy; 2026 Master Piece of Paper. Released under the Educational Community License 2.0 (ECL-2.0).
+      </div>
+
+      <ul class="footer-links" id="footer-links-list">
+        <li>
+          <a href="#readme">Readme</a>
+        </li>
+        <li>
+          <a href="#privacy">Privacy Policy</a>
+        </li>
+        <li>
+          <a href="#contributors">Contributors</a>
+        </li>
+        <li>
+          <a href="#license">License</a>
+        </li>
+      </ul>
     </footer>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const obj = document.getElementById("app-content");
-            const navLinks = document.querySelectorAll(".nav-links a, .footer-links a, .logo");
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const appContent = document.getElementById("app-content");
+      const obj = appContent.querySelector("object");
+      const navLinks = document.querySelectorAll(".nav-links a, .footer-links a, .logo");
 
-            // Mobile Navigation Toggle Logic
-            const navToggle = document.getElementById("nav-toggle");
-            const navMenu = document.getElementById("nav-menu");
-            const navOverlay = document.getElementById("nav-overlay");
+      // Mobile Navigation Toggle Logic
+      const header = document.querySelector("header");
+      const navToggle = document.getElementById("nav-toggle");
+      const navMenu = document.getElementById("nav-menu");
+      const navOverlay = document.getElementById("nav-overlay");
 
-            const toggleMenu = () => {
-                const isOpen = navToggle.classList.toggle("active");
-                navMenu.classList.toggle("active");
-                navOverlay.classList.toggle("active");
-                navToggle.setAttribute("aria-expanded", isOpen);
-                document.body.style.overflow = isOpen ? "hidden" : "";
-            };
+      const toggleMenu = () => {
+        const isOpen = navToggle.classList.toggle("active");
+        navMenu.classList.toggle("active");
+        navOverlay.classList.toggle("active");
+        if (header) {
+          header.classList.toggle("menu-open", isOpen);
+        }
+        navToggle.setAttribute("aria-expanded", isOpen);
+        document.body.style.overflow = isOpen ? "hidden" : "";
+      };
 
-            const closeMenu = () => {
-                navToggle.classList.remove("active");
-                navMenu.classList.remove("active");
-                navOverlay.classList.remove("active");
-                navToggle.setAttribute("aria-expanded", "false");
-                document.body.style.overflow = "";
-            };
+      const closeMenu = () => {
+        navToggle.classList.remove("active");
+        navMenu.classList.remove("active");
+        navOverlay.classList.remove("active");
+        if (header) {
+          header.classList.remove("menu-open");
+        }
+        navToggle.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+      };
 
-            if (navToggle && navMenu && navOverlay) {
-                navToggle.addEventListener("click", toggleMenu);
-                navOverlay.addEventListener("click", closeMenu);
+      if (navToggle && navMenu && navOverlay) {
+        navToggle.addEventListener("click", toggleMenu);
+        navOverlay.addEventListener("click", closeMenu);
+      }
+
+      // Close mobile menu on any link click (including logo and nav links)
+      document.querySelectorAll(".nav-links a, .logo").forEach(link => {
+        link.addEventListener("click", closeMenu);
+      });
+
+      // Header Scroll Logic
+      const handleScroll = () => {
+        if (header) {
+          if (window.scrollY > 20) {
+            header.classList.add("scrolled");
+          } else {
+            header.classList.remove("scrolled");
+          }
+        }
+      };
+      window.addEventListener("scroll", handleScroll);
+      handleScroll(); // Run initially
+
+      // Mapping hashes to template files
+      const routes = {
+        "home": "template/home.html",
+        "readme": "template/readme.html",
+        "privacy": "template/privacy.html",
+        "contributors": "template/contributors.html",
+        "license": "template/license.html"
+      };
+
+      const navigate = () => {
+        let hash = window.location.hash.replace("#", "").trim();
+        if (!hash || !routes[hash]) {
+          hash = "home";
+        }
+
+        const targetUrl = routes[hash];
+                  
+        // Fade out effect
+        appContent.classList.add("fade-out");
+                  
+        setTimeout(() => {
+          obj.setAttribute("data", targetUrl);
+          updateActiveLink(hash);
+        }, 150);
+      };
+
+      const updateActiveLink = (hash) => {
+        let currentId = "nav-home";
+        if (hash === "privacy") currentId = "nav-privacy";
+        else if (hash === "readme") currentId = "nav-readme";
+        else if (hash === "contributors") currentId = "nav-contributors";
+        else if (hash === "license") currentId = "nav-license";
+
+        document.querySelectorAll(".nav-links .nav-link").forEach(link => {
+          link.classList.remove("active");
+        });
+
+        const activeLink = document.getElementById(currentId);
+        if (activeLink) {
+          activeLink.classList.add("active");
+        }
+      };
+
+      // Resize object dynamically to match its inner document scroll height
+      const resizeObject = () => {
+        try {
+          const innerDoc = obj.contentDocument || obj.contentWindow.document;
+          if (innerDoc) {
+            obj.style.height = "auto";
+            const height = innerDoc.documentElement.scrollHeight || innerDoc.body.scrollHeight;
+            obj.style.height = (height + 20) + "px"; // added small buffer
+          }
+        } catch (e) {
+          console.error("Resize error:", e);
+        }
+      };
+
+      obj.addEventListener("load", () => {
+        // Fade in
+        appContent.classList.remove("fade-out");
+        resizeObject();
+
+        // Setup listener on internal link clicks inside the object
+        try {
+          const innerDoc = obj.contentDocument || obj.contentWindow.document;
+          if (innerDoc) {
+            // Monitor size changes inside the loaded document
+            if (innerDoc.body) {
+              const observer = new ResizeObserver(() => {
+                resizeObject();
+              });
+              observer.observe(innerDoc.body);
             }
 
-            // Close mobile menu on any link click (including logo and nav links)
-            document.querySelectorAll(".nav-links a, .logo").forEach(link => {
-                link.addEventListener("click", closeMenu);
-            });
-
-            // Mapping hashes to template files
-            const routes = {
-                "home": "template/home.html",
-                "readme": "template/readme.html",
-                "privacy": "template/privacy.html",
-                "contributors": "template/contributors.html",
-                "license": "template/license.html"
-            };
-
-            const navigate = () => {
-                let hash = window.location.hash.replace("#", "").trim();
-                if (!hash || !routes[hash]) {
-                    hash = "home";
-                }
-
-                const targetUrl = routes[hash];
-                
-                // Fade out effect
-                obj.classList.add("fade-out");
-                
-                setTimeout(() => {
-                    obj.setAttribute("data", targetUrl);
-                    updateActiveLink(hash);
-                }, 150);
-            };
-
-            const updateActiveLink = (hash) => {
-                let currentId = "nav-home";
-                if (hash === "privacy") currentId = "nav-privacy";
-                else if (hash === "readme") currentId = "nav-readme";
-                else if (hash === "contributors") currentId = "nav-contributors";
-                else if (hash === "license") currentId = "nav-license";
-
-                document.querySelectorAll(".nav-links .nav-link").forEach(link => {
-                    link.classList.remove("active");
+            // Intercept clicks on links inside the object
+            innerDoc.querySelectorAll("a").forEach(link => {
+              const href = link.getAttribute("href");
+              if (href && !href.startsWith("http") && !href.startsWith("//") && !href.startsWith("mailto:") && !href.startsWith("tel:")) {
+                // If click target is relative to templates
+                link.addEventListener("click", (e) => {
+                  e.preventDefault();
+                  const pageName = href.replace(".html", "").replace("template/", "");
+                  window.location.hash = pageName;
                 });
-
-                const activeLink = document.getElementById(currentId);
-                if (activeLink) {
-                    activeLink.classList.add("active");
-                }
-            };
-
-            // Resize object dynamically to match its inner document scroll height
-            const resizeObject = () => {
-                try {
-                    const innerDoc = obj.contentDocument || obj.contentWindow.document;
-                    if (innerDoc) {
-                        obj.style.height = "auto";
-                        const height = innerDoc.documentElement.scrollHeight || innerDoc.body.scrollHeight;
-                        obj.style.height = (height + 20) + "px"; // added small buffer
-                    }
-                } catch (e) {
-                    console.error("Resize error:", e);
-                }
-            };
-
-            obj.addEventListener("load", () => {
-                // Fade in
-                obj.classList.remove("fade-out");
-                resizeObject();
-
-                // Setup listener on internal link clicks inside the object
-                try {
-                    const innerDoc = obj.contentDocument || obj.contentWindow.document;
-                    if (innerDoc) {
-                        // Monitor size changes inside the loaded document
-                        if (innerDoc.body) {
-                            const observer = new ResizeObserver(() => {
-                                resizeObject();
-                            });
-                            observer.observe(innerDoc.body);
-                        }
-
-                        // Intercept clicks on links inside the object
-                        innerDoc.querySelectorAll("a").forEach(link => {
-                            const href = link.getAttribute("href");
-                            if (href && !href.startsWith("http") && !href.startsWith("//") && !href.startsWith("mailto:") && !href.startsWith("tel:")) {
-                                // If click target is relative to templates
-                                link.addEventListener("click", (e) => {
-                                    e.preventDefault();
-                                    const pageName = href.replace(".html", "").replace("template/", "");
-                                    window.location.hash = pageName;
-                                });
-                            }
-                        });
-                    }
-                } catch (e) {
-                    console.error("Object document access denied:", e);
-                }
+              }
             });
+          }
+        } catch (e) {
+          console.error("Object document access denied:", e);
+        }
+      });
 
-            // Listen for hash changes
-            window.addEventListener("hashchange", navigate);
+      // Listen for hash changes
+      window.addEventListener("hashchange", navigate);
 
-            // Initial load
-            navigate();
-        });
-    </script>
-</body>
+      // Initial load
+      navigate();
+    });
+  </script>
 </html>
