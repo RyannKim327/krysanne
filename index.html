@@ -14,27 +14,39 @@
     <!-- Custom StyleSheet -->
     <link rel="stylesheet" href="template/style.css">
     <style>
-        #app-content {
-            width: 100%;
-            border: none;
-            overflow: hidden;
-            display: block;
-            transition: opacity 0.2s ease;
-        }
-        .fade-out {
-            opacity: 0;
-        }
+      body{
+        width: 100dvw;
+        height: 100dvh;
+      }
+      #app-content {
+        width: 100%;
+        border: none;
+        overflow: hidden;
+        display: block;
+        transition: opacity 0.2s ease;
+      }
+      .fade-out {
+        opacity: 0;
+      }
     </style>
 </head>
 <body>
+    <div class="nav-overlay" id="nav-overlay"></div>
     <header>
         <div class="container navbar">
             <a href="#home" class="logo" id="logo-main">
                 <i class="fa-solid fa-robot"></i> TeleAI
             </a>
-            <nav aria-label="Main Navigation">
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </button>
+            <nav aria-label="Main Navigation" id="nav-menu">
                 <ul class="nav-links">
-                    <li><a href="#home" class="nav-link" id="nav-home"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li>
+                      <a href="#home" class="nav-link" id="nav-home"><i class="fa-solid fa-house"></i> Home</a>
+                    </li>
                     <li><a href="#readme" class="nav-link" id="nav-readme"><i class="fa-solid fa-book-open"></i> Readme</a></li>
                     <li><a href="#privacy" class="nav-link" id="nav-privacy"><i class="fa-solid fa-shield-halved"></i> Privacy</a></li>
                     <li><a href="#contributors" class="nav-link" id="nav-contributors"><i class="fa-solid fa-users"></i> Contributors</a></li>
@@ -67,6 +79,37 @@
         document.addEventListener("DOMContentLoaded", () => {
             const obj = document.getElementById("app-content");
             const navLinks = document.querySelectorAll(".nav-links a, .footer-links a, .logo");
+
+            // Mobile Navigation Toggle Logic
+            const navToggle = document.getElementById("nav-toggle");
+            const navMenu = document.getElementById("nav-menu");
+            const navOverlay = document.getElementById("nav-overlay");
+
+            const toggleMenu = () => {
+                const isOpen = navToggle.classList.toggle("active");
+                navMenu.classList.toggle("active");
+                navOverlay.classList.toggle("active");
+                navToggle.setAttribute("aria-expanded", isOpen);
+                document.body.style.overflow = isOpen ? "hidden" : "";
+            };
+
+            const closeMenu = () => {
+                navToggle.classList.remove("active");
+                navMenu.classList.remove("active");
+                navOverlay.classList.remove("active");
+                navToggle.setAttribute("aria-expanded", "false");
+                document.body.style.overflow = "";
+            };
+
+            if (navToggle && navMenu && navOverlay) {
+                navToggle.addEventListener("click", toggleMenu);
+                navOverlay.addEventListener("click", closeMenu);
+            }
+
+            // Close mobile menu on any link click (including logo and nav links)
+            document.querySelectorAll(".nav-links a, .logo").forEach(link => {
+                link.addEventListener("click", closeMenu);
+            });
 
             // Mapping hashes to template files
             const routes = {
