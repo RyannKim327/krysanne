@@ -7,10 +7,8 @@ export default function mdExtractor(content: string) {
   }
 
   try {
-
     return JSON.parse(content)
   } catch (e) {
-
     return {
       message: content,
       command: "",

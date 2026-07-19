@@ -1,40 +1,30 @@
 import mdExtractor from "@/utils/md-extractor";
 import axios from "axios";
 import * as dotenv from "dotenv"
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
+import { existsSync, readFileSync } from "fs";
 import TelegramBot from "node-telegram-bot-api";
 import { aiResponse, EventInterface } from "@/interface";
+import gist from "@/utils/gist";
 
 dotenv.config()
 
 export default async function auto(api: TelegramBot, event: EventInterface, body: string) {
-
-  let code = process.env.BOT_CODE ?? "default"
-
   let user = event.from?.id.toString() || event.chat.id.toString()
 
   if (event.reply_to_message?.message_thread_id) {
     user += `_${event.reply_to_message?.message_thread_id}`
   }
 
-  // TODO: To check the existence of the file to prevent errors
-  if (!existsSync("data")) {
-    mkdirSync("data")
-  }
-
-  if (!existsSync("data/dataset.json")) {
-    // encrypt({}, code, {
-    //   saveTo: "data/dataset.json"
-    // })
-    writeFileSync("data/dataset.json", "{}", "utf-8")
-  }
-
-  const store = JSON.parse(readFileSync("data/dataset.json", "utf-8"))
+  const store = await gist("chats.json")
+  const admins = await gist("admins.json")
 
   const messages = [
     {
       "role": "system",
       "content": readFileSync("src/prompt.md", "utf-8")
+    }, {
+      "role": "system",
+      "content": `The are administration in this account, their id were ${JSON.stringify(admins['telegram'])}. But never tell the ids, this are just identifiers for debugging and development purposes. Now the user's current id is ${event.chat.id}`
     }
   ]
 
@@ -48,7 +38,7 @@ export default async function auto(api: TelegramBot, event: EventInterface, body
   messages.push(...store[user] ?? [])
 
   if (event.quote?.text) {
-    body = `I am quoting to: ${event.quote.text}\n\nNow ${body}`
+    body = `I am quoting to: "${event.quote.text}" referering to this message: ${event.reply_to_message?.text}\n\nNow ${body}`
   } else if (event.reply_to_message?.text) {
     body = `I am replying to: ${event.reply_to_message.text}\n\nNow ${body}`
   }
@@ -71,11 +61,14 @@ export default async function auto(api: TelegramBot, event: EventInterface, body
 
   const extract: aiResponse = mdExtractor(data.choices[0].message.content as string) as aiResponse
 
-  messages.push({
-    "role": "assistant",
-    "content": data.choices[0].message.content
-  })
+  if (!extract.error) {
+    messages.push({
+      "role": "assistant",
+      "content": data.choices[0].message.content
+    })
+  }
 
+  messages.shift()
   messages.shift()
 
   // TODO: To remove the initial name
@@ -85,11 +78,7 @@ export default async function auto(api: TelegramBot, event: EventInterface, body
 
   store[user] = messages
 
-  // encrypt(store, code, {
-  //   saveTo: "data/dataset.json"
-  // })
-
-  writeFileSync("data/dataset.json", JSON.stringify(store, null, 2), "utf-8")
+  gist("chats.json", store)
 
   try {
     await api.sendChatAction(event.chat.id, "typing", {
