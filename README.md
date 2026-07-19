@@ -1,19 +1,19 @@
-# Krysanne — Compassionate AI Telegram Companion
+# Mayie — Compassionate AI Telegram Companion
 
 [![License: ECL-2.0](https://img.shields.io/badge/License-ECL--2.0-blue.svg)](https://opensource.org/licenses/ECL-2.0)
 [![Platform: Node.js](https://img.shields.io/badge/Platform-Node.js-green.svg)](https://nodejs.org/)
 [![Language: TypeScript](https://img.shields.io/badge/Language-TypeScript-blue.svg)](https://www.typescriptlang.org/)
-[![wakatime](https://wakatime.com/badge/github/RyannKim327/krysanne.svg)](https://wakatime.com/badge/github/RyannKim327/krysanne)
+[![wakatime](https://wakatime.com/badge/github/RyannKim327/mayie.svg)](https://wakatime.com/badge/github/RyannKim327/mayie)
 
-![Krysanne Banner](assets/banner.jpg)
+![Mayie Banner](assets/banner.jpg)
 
 > **"What I aim is to give people a friend, to prevent suicide cases. To call someone who listen to them."**
-> — *Krysanne Mission Statement*
+> — *Mayie Mission Statement*
 
-**Krysanne** is an empathetic, always-on AI assistant hosted on Telegram. This chatbot acts as a companion designed to listen, converse, and offer a supportive presence for individuals who may feel isolated, distressed, or simply need a safe space to share their thoughts. Powered by **OpenRouter AI** models, Krysanne aims to provide comfort and human-like warmth to prevent loneliness and mental health crises.
+**Mayie** is an empathetic, always-on AI assistant hosted on Telegram. This chatbot acts as a companion designed to listen, converse, and offer a supportive presence for individuals who may feel isolated, distressed, or simply need a safe space to share their thoughts. Powered by **OpenRouter AI** models, Mayie aims to provide comfort and human-like warmth to prevent loneliness and mental health crises.
 
 > [!IMPORTANT]
-> **Disclaimer:** Krysanne is an AI companion meant to lend a supportive ear and offer temporary comfort. It is **not** designed to replace physical human touch, real relationships, or professional help/counseling for emotional distress and mental health problems.
+> **Disclaimer:** Mayie is an AI companion meant to lend a supportive ear and offer temporary comfort. It is **not** designed to replace physical human touch, real relationships, or professional help/counseling for emotional distress and mental health problems.
 > 
 > **Crisis Support Hotline (Philippines):** If you are experiencing thoughts of self-harm or suicide, please immediately contact **(02) 8804-4673** (Hopeline Philippines; Homepage: [findahelpline.com/organizations/hopeline](https://findahelpline.com/organizations/hopeline)) or visit [findahelpline.com/countries/ph](https://findahelpline.com/countries/ph) for more hotlines. If you are in the US or Canada, call or text **988**. Professional help is always available, and you are not alone.
 
@@ -50,7 +50,7 @@
 
 ## 🎨 Web Design Philosophy
 
-The companion platform frontend features a sleek, premium, and highly-focused design system that reflects Krysanne's comforting and gentle persona:
+The companion platform frontend features a sleek, premium, and highly-focused design system that reflects Mayie's comforting and gentle persona:
 
 *   **Floating Capsule Navigation:** The header floats centered at the top of the page, adopting a Tailwind-style `rounded-full` layout. This ensures a clean, isolated, and floating web component aesthetic.
 *   **Dynamic Color States:**
@@ -62,7 +62,7 @@ The companion platform frontend features a sleek, premium, and highly-focused de
 
 ## 🤖 JSON-Driven Command Routing
 
-Krysanne communicates in a structured JSON format to coordinate conversation and perform actions. Every response is parsed by a Markdown/JSON extractor to route command execution:
+Mayie communicates in a structured JSON format to coordinate conversation and perform actions. Every response is parsed by a Markdown/JSON extractor to route command execution:
 
 ```json
 {
@@ -96,8 +96,8 @@ You will also need:
 Clone this repository and navigate into the project directory:
 
 ```bash
-git clone https://github.com/RyannKim327/krysanne
-cd krysanne
+git clone https://github.com/RyannKim327/mayie
+cd mayie
 ```
 
 Install the dependencies:
@@ -151,13 +151,13 @@ If `WEBHOOK_URL` is omitted, the bot will fall back automatically to **long poll
 ## 📂 Project Structure
 
 ```
-krysanne/
+mayie/
 ├── data/               # Persistent conversational datasets (git-ignored)
 ├── src/
 │   ├── index.ts        # Bot initialization & polling/webhook routing
 │   ├── core.ts         # Event router and start action handler
 │   ├── interface.ts    # TypeScript definitions for AI responses
-│   ├── prompt.md       # Core identity & system prompt for Krysanne
+│   ├── prompt.md       # Core identity & system prompt for Mayie
 │   ├── middleware/
 │   │   └── auto.ts     # AI integration, conversational history management & dynamic routing
 │   ├── script/         # Extensible command modules loaded dynamically on execution
@@ -177,7 +177,7 @@ krysanne/
 
 ## 🔒 Privacy & Safety
 
-We take user privacy and emotional safety seriously. Krysanne is not a substitute for professional mental health support or physical human connection, but rather an AI companion to provide a temporary, listening hand during difficult moments. 
+We take user privacy and emotional safety seriously. Mayie is not a substitute for professional mental health support or physical human connection, but rather an AI companion to provide a temporary, listening hand during difficult moments. 
 
 *   **Crisis Hotline:** If you are experiencing thoughts of self-harm or suicide, please call **(02) 8804-4673** (Hopeline Philippines; Homepage: [findahelpline.com/organizations/hopeline](https://findahelpline.com/organizations/hopeline)) or visit [findahelpline.com/countries/ph](https://findahelpline.com/countries/ph) for local hotlines.
 *   **Privacy & Data Storage:** Conversational data is used strictly for continuous communication and is stored securely in a private GitHub Secret Gist. This prevents local storage exposure and ensures data persists across server restarts. To protect your data, an encryptor utilizing `json-enc-dec` is being integrated and will be applied in future updates to cryptographically encrypt all conversational logs.
@@ -190,8 +190,8 @@ For full details on data handling and mental health crisis disclaimers, please r
 
 This project is licensed under the **Educational Community License, Version 2.0 (ECL-2.0)**. See the [LICENSE.md](LICENSE.md) file for more information.
 
-### 🌸 Krysanne Name Use Policy
-Use of the name **Krysanne** is restricted:
+### 🌸 Mayie Name Use Policy
+Use of the name **Mayie** is restricted:
 1. **Association:** Must only be used in projects officially related to `Master Piece of Paper`, as it is a name deeply personal to the author/creator of this project (Ryann Kim M. Sesgundo).
 2. **Prohibited Activities:** Must not be used in any kind of illegal activities, violence, nudity, or anything related to such activities.
 3. **Core Purpose:** Must strictly pertain to promoting peace, love, and offering support to anyone who is in need.
@@ -201,4 +201,4 @@ Use of the name **Krysanne** is restricted:
 
 ## ❤️ Contributing
 
-We welcome contributions of all kinds to make **Krysanne** more supportive, secure, and accessible. Please see [CONTRIBUTORS.md](CONTRIBUTORS.md) for contribution guidelines and to meet our team.
+We welcome contributions of all kinds to make **Mayie** more supportive, secure, and accessible. Please see [CONTRIBUTORS.md](CONTRIBUTORS.md) for contribution guidelines and to meet our team.

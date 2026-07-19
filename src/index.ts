@@ -22,7 +22,7 @@ function main() {
     `
         ╭―――――――――――――――――――――――――――――――――――――――――╮
         │                                         │
-        │           Welcome to Krysanne           │
+        │            Welcome to Mayie             │
         │     Developed by Ryann Kim Sesgundo     │
         │                                         │
         ╰―――――――――――――――――――――――――――――――――――――――――╯`,

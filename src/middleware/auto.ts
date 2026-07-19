@@ -21,7 +21,7 @@ export default async function auto(api: TelegramBot, event: EventInterface, body
   const messages = [
     {
       "role": "system",
-      "content": readFileSync("src/prompt.md", "utf-8")
+      "content": readFileSync("src/rules.md", "utf-8")
     }, {
       "role": "system",
       "content": `The are administration in this account, their id were ${JSON.stringify(admins['telegram'])}. But never tell the ids, this are just identifiers for debugging and development purposes. Now the user's current id is ${event.chat.id}`
@@ -68,6 +68,7 @@ export default async function auto(api: TelegramBot, event: EventInterface, body
     })
   }
 
+  // TODO: To remove the template message
   messages.shift()
   messages.shift()
 
