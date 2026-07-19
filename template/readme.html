@@ -38,7 +38,8 @@
         <h2>🌟 Key Features</h2>
         <ul>
           <li><strong>Empathetic Listening:</strong> Engineered to act as a supportive companion, offering active listening and a compassionate outlet for users.</li>
-          <li><strong>Continuous Chat Memory:</strong> Retains conversational context securely per Telegram <code>chat.id</code> in a temporary local data store to enable continuous, context-aware dialogues.</li>
+          <li><strong>Persistent Chat Memory (GitHub Secret Gist):</strong> Retains conversational context securely per Telegram <code>chat.id</code> using a secure, private GitHub Secret Gist. This keeps data private and ensures chat history persists across server restarts.</li>
+          <li><strong>Planned Data Encryption:</strong> An encryptor layer (utilizing the <code>json-enc-dec</code> package and <code>BOT_CODE</code> key) is currently prepared and will be fully applied in future updates to encrypt conversational logs in the Gist store, ensuring maximum cryptographic privacy.</li>
           <li><strong>Dynamic Command Routing:</strong> Commands generated in structured AI JSON responses are dynamically matched, imported, and executed from modular scripts in the <code>src/script/</code> directory.</li>
           <li><strong>Extensible Built-in Commands:</strong>
             <ul>
@@ -93,7 +94,9 @@ npm install</code></pre>
         <pre><code>TELEGRAM_TOKEN=your_telegram_bot_token_here
 AI_TOKEN=your_openrouter_api_key_here
 BOT_CODE=your_bot_secret_code_here
-LUMENFALL_API=your_lumenfall_api_key_here</code></pre>
+LUMENFALL_API=your_lumenfall_api_key_here
+GIST_ID=your_secret_gist_id_here
+GITHUB_TOKEN=your_personal_access_token_here</code></pre>
 
         <h3>3. Running the Bot</h3>
         <p>To start the bot in development or production mode, run:</p>
@@ -102,7 +105,7 @@ LUMENFALL_API=your_lumenfall_api_key_here</code></pre>
         <hr>
 
         <h2>🔒 Privacy & Safety</h2>
-        <p>We take user privacy and emotional safety seriously. Conversational data is used strictly for continuous communication and is only kept in the local data store of the platform, which completely resets when the server is restarted. For full details on data handling and mental health crisis disclaimers, please refer to our <a href="#privacy">Privacy Policy</a>.</p>
+        <p>We take user privacy and emotional safety seriously. Conversational data is used strictly for continuous communication and is stored securely in a private GitHub Secret Gist. This prevents local storage exposure and ensures data persists across server restarts. To protect your data, an encryptor utilizing <code>json-enc-dec</code> is being integrated and will be applied in future updates to cryptographically encrypt all conversational logs. For full details on data handling and mental health crisis disclaimers, please refer to our <a href="#privacy">Privacy Policy</a>.</p>
 
         <h2>🛡️ License & Name Policy</h2>
         <p>This project is licensed under the <strong>Educational Community License, Version 2.0 (ECL-2.0)</strong>. See the <a href="#license">License</a> page for more information.</p>

@@ -1,6 +1,6 @@
 # Privacy Policy & Support Disclaimer
 
-**Last Updated:** July 16, 2026
+**Last Updated:** July 19, 2026
 
 Welcome to **Krysanne**, an empathetic AI Telegram companion designed to offer listening, conversation, and supportive presence. Your privacy and trust are of utmost importance, especially given our mission to provide comfort, combat loneliness, and offer a safe space for expression.
 
@@ -24,7 +24,7 @@ Please read this Privacy Policy carefully to understand how your data is handled
 
 ## 🔒 2. Information We Collect
 
-To provide a context-aware and fluid conversation, Krysanne collects and holds conversational information. **The data gathered is used strictly for continuous communication.** The data is not stored in any external platform, and resides only within the local data store of the hosting platform, which completely resets when the server is restarted.
+To provide a context-aware and fluid conversation, Krysanne collects and holds conversational information. **The data gathered is used strictly for continuous communication.** To prevent unauthorized local system access and ensure continuity across server updates/restarts, this data is saved securely to a private GitHub Secret Gist.
 
 We collect:
 1.  **Telegram Identifiers:** Your Telegram `chat.id`, `user.id`, and thread identifier (if using group topics) to associate conversation history with your current chat session.
@@ -37,18 +37,19 @@ We collect:
 ## ⚙️ 3. How We Use and Process Your Data
 
 Your data is processed and used strictly for the following purposes:
-*   **Conversational Continuity (Context):** Storing previous messages in the platform's temporary local data store allows Krysanne to remember what was said earlier, facilitating natural, continuous, and supportive dialogue.
+*   **Conversational Continuity (Context):** Storing previous messages in the secure GitHub Secret Gist allows Krysanne to remember what was said earlier, facilitating natural, continuous, and supportive dialogue.
 *   **AI Inference:** Messages are sent securely to the **OpenRouter AI** API (default model: `tencent/hy3:free` or equivalent) to generate empathetic responses, but are not stored or retained permanently on any other external platform.
 
 ---
 
 ## 💾 4. Data Storage and Retention
 
-*   **Local Storage only (Ephemeral):** Conversation histories and Telegram identifiers are stored locally on the hosting server in a temporary file (`data/dataset.json`). This local data store is entirely ephemeral and **resets when the server is restarted**.
-*   **No Centralized Database:** We do not upload or save your chats to any centralized cloud database, profiling engine, or advertising network.
+*   **GitHub Secret Gist Data Store:** Conversation histories and Telegram identifiers are stored securely in a private, secure GitHub Gist (configured via `GIST_ID` and `GITHUB_TOKEN`). This data persists across server restarts so that your conversations are not lost.
+*   **No Centralized Database/Ad Profiling:** We do not upload or save your chats to any centralized cloud database, profiling engine, or advertising network. The Gist remains private and fully under the control of the hosting administrator.
+*   **Cryptographic Protection (Future Updates):** To ensure ultimate confidentiality of the stored logs, an encryptor utilizing `json-enc-dec` is imported and will be applied in future updates. This will encrypt all conversational history contents written to the Gist store.
 *   **User-Controlled Erasure:** You have complete control over your data.
     *   You can delete your history at any time by triggering the `clear-chat` command (e.g., by asking the bot to reset or clear the chat history).
-    *   This instantly removes your user entry and history from `data/dataset.json` and, if applicable, deletes the Telegram forum thread.
+    *   This instantly removes your user entry and history from the GitHub Secret Gist and, if applicable, deletes the Telegram forum thread.
 
 ---
 

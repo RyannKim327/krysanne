@@ -22,7 +22,8 @@
 ## 🌟 Key Features
 
 *   **Empathetic Listening:** Engineered to act as a supportive companion, offering active listening and a compassionate outlet for users.
-*   **Continuous Chat Memory:** Retains conversational context securely per Telegram `chat.id` in a temporary local data store (which resets when the server is restarted) to enable continuous, context-aware dialogues.
+*   **Persistent Chat Memory (GitHub Secret Gist):** Retains conversational context securely per Telegram `chat.id` using a secure, private GitHub Secret Gist. This keeps data private and ensures chat history persists across server restarts.
+*   **Planned Data Encryption:** An encryptor layer (utilizing the `json-enc-dec` package and `BOT_CODE` key) is currently prepared and will be fully applied in future updates to encrypt conversational logs in the Gist store, ensuring maximum cryptographic privacy.
 *   **Dynamic Command Routing:** Commands generated in structured AI JSON responses are dynamically matched, imported, and executed from modular scripts in the `src/script/` directory.
 *   **Extensible Built-in Commands:**
     *   `clear-chat`: Resets/clears the conversational history for a fresh start.
@@ -118,11 +119,15 @@ TELEGRAM_TOKEN=your_telegram_bot_token_here
 # OpenRouter AI API Configuration
 AI_TOKEN=your_openrouter_api_key_here
 
-# Bot Code (Secret key for hashing/encryption of conversational logs)
+# Bot Code (Secret key for hashing/encryption of conversational logs, reserved for future encryptor updates)
 BOT_CODE=your_bot_secret_code_here
 
 # Lumenfall AI API Key (Required for the `imgen` command)
 LUMENFALL_API=your_lumenfall_api_key_here
+
+# GitHub Secret Gist Data Store Configuration
+GIST_ID=your_secret_gist_id_here
+GITHUB_TOKEN=your_personal_access_token_here
 
 # Optional: Webhook Configuration (Leave empty to use polling mode)
 # WEBHOOK_URL=https://your-domain.com
@@ -175,7 +180,7 @@ krysanne/
 We take user privacy and emotional safety seriously. Krysanne is not a substitute for professional mental health support or physical human connection, but rather an AI companion to provide a temporary, listening hand during difficult moments. 
 
 *   **Crisis Hotline:** If you are experiencing thoughts of self-harm or suicide, please call **(02) 8804-4673** (Hopeline Philippines; Homepage: [findahelpline.com/organizations/hopeline](https://findahelpline.com/organizations/hopeline)) or visit [findahelpline.com/countries/ph](https://findahelpline.com/countries/ph) for local hotlines.
-*   **Privacy & Data Storage:** Conversational data is used strictly for continuous communication and is only kept in the local data store of the platform, which completely resets when the server is restarted.
+*   **Privacy & Data Storage:** Conversational data is used strictly for continuous communication and is stored securely in a private GitHub Secret Gist. This prevents local storage exposure and ensures data persists across server restarts. To protect your data, an encryptor utilizing `json-enc-dec` is being integrated and will be applied in future updates to cryptographically encrypt all conversational logs.
 
 For full details on data handling and mental health crisis disclaimers, please refer to our [PRIVACY.md](PRIVACY.md).
 

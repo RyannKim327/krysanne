@@ -12,7 +12,7 @@
       <div class="doc-header">
         <span class="hero-badge">Safety & Trust</span>
         <h1 class="doc-title">Privacy Policy</h1>
-        <p class="doc-meta">Last Updated: July 16, 2026</p>
+        <p class="doc-meta">Last Updated: July 19, 2026</p>
       </div>
 
       <div class="doc-content">
@@ -41,7 +41,7 @@
         </div>
 
         <h2>🔒 2. Information We Collect</h2>
-        <p>To provide a context-aware and fluid conversation, Krysanne collects and holds conversational information. <strong>The data gathered is used strictly for continuous communication.</strong> The data is not stored in any external platform, and resides only within the local data store of the hosting platform, which completely resets when the server is restarted.</p>
+        <p>To provide a context-aware and fluid conversation, Krysanne collects and holds conversational information. <strong>The data gathered is used strictly for continuous communication.</strong> To prevent unauthorized local system access and ensure continuity across server updates/restarts, this data is saved securely to a private GitHub Secret Gist.</p>
         <p>We collect:</p>
         <ol>
           <li><strong>Telegram Identifiers:</strong> Your Telegram <code>chat.id</code>, <code>user.id</code>, and thread identifier (if using group topics) to associate conversation history with your current chat session.</li>
@@ -52,15 +52,16 @@
         <h2>⚙️ 3. How We Use and Process Your Data</h2>
         <p>Your data is processed and used strictly for the following purposes:</p>
         <ul>
-          <li><strong>Conversational Continuity (Context):</strong> Storing previous messages in the platform's temporary local data store allows Krysanne to remember what was said earlier, facilitating natural, continuous, and supportive dialogue.</li>
+          <li><strong>Conversational Continuity (Context):</strong> Storing previous messages in the secure GitHub Secret Gist allows Krysanne to remember what was said earlier, facilitating natural, continuous, and supportive dialogue.</li>
           <li><strong>AI Inference:</strong> Messages are sent securely to the <strong>OpenRouter AI</strong> API to generate empathetic responses, but are not stored or retained permanently on any other external platform.</li>
         </ul>
 
         <h2>💾 4. Data Storage and Retention</h2>
         <ul>
-          <li><strong>Local Storage only (Ephemeral):</strong> Conversation histories and Telegram identifiers are stored locally on the hosting server in a temporary file (<code>data/dataset.json</code>). This local data store is entirely ephemeral and <strong>resets when the server is restarted</strong>.</li>
-          <li><strong>No Centralized Database:</strong> We do not upload or save your chats to any centralized cloud database, profiling engine, or advertising network.</li>
-          <li><strong>User-Controlled Erasure:</strong> You have complete control over your data. You can delete your history at any time by triggering the <code>clear-chat</code> command (e.g., by asking the bot to reset or clear the chat history). This instantly removes your user entry and history from <code>data/dataset.json</code>.</li>
+          <li><strong>GitHub Secret Gist Data Store:</strong> Conversation histories and Telegram identifiers are stored securely in a private, secure GitHub Gist (configured via <code>GIST_ID</code> and <code>GITHUB_TOKEN</code>). This data persists across server restarts so that your conversations are not lost.</li>
+          <li><strong>No Centralized Database/Ad Profiling:</strong> We do not upload or save your chats to any centralized cloud database, profiling engine, or advertising network. The Gist remains private and fully under the control of the hosting administrator.</li>
+          <li><strong>Cryptographic Protection (Future Updates):</strong> To ensure ultimate confidentiality of the stored logs, an encryptor utilizing <code>json-enc-dec</code> is imported and will be applied in future updates. This will encrypt all conversational history contents written to the Gist store.</li>
+          <li><strong>User-Controlled Erasure:</strong> You have complete control over your data. You can delete your history at any time by triggering the <code>clear-chat</code> command (e.g., by asking the bot to reset or clear the chat history). This instantly removes your user entry and history from the GitHub Secret Gist.</li>
         </ul>
 
         <h2>🏢 5. Third-Party Services</h2>
