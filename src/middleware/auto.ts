@@ -47,6 +47,12 @@ export default async function auto(api: TelegramBot, event: EventInterface, body
 
   messages.push(...store[user] ?? [])
 
+  if (event.quote?.text) {
+    body = `I am quoting to: ${event.quote.text}\n\nNow ${body}`
+  } else if (event.reply_to_message?.text) {
+    body = `I am replying to: ${event.reply_to_message.text}\n\nNow ${body}`
+  }
+
   messages.push({
     "role": "user",
     content: body

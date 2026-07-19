@@ -190,6 +190,7 @@ Use of the name **Krysanne** is restricted:
 1. **Association:** Must only be used in projects officially related to `Master Piece of Paper`, as it is a name deeply personal to the author/creator of this project (Ryann Kim M. Sesgundo).
 2. **Prohibited Activities:** Must not be used in any kind of illegal activities, violence, nudity, or anything related to such activities.
 3. **Core Purpose:** Must strictly pertain to promoting peace, love, and offering support to anyone who is in need.
+4. **Reason:** To preserve trust in the name and ensure users feel safe and comfortable. While the creator does not claim exclusive ownership of the name itself, this policy is meant to prevent any doubt about its integrity and supportive purpose.
 
 ---
 
