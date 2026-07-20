@@ -1,4 +1,4 @@
-### Project: Mayie
+### Project: Krysanne
 ### Copyright (c) 2026 Master Piece of Paper (formerly MPOP Reverse II)
 ### Primary Author: Ryann Kim M. Sesgundo
 
@@ -18,10 +18,10 @@ limitations under the License.
 
 ---
 
-## 🌸 Mayie Name Use Policy
+## 🌸 Krysanne Name Use Policy
 
-1. **Association:** The name **Mayie** must only be used in projects officially related to Master Piece of Paper, as it is a name deeply personal to the author/creator of this project (Ryann Kim M. Sesgundo).
-2. **Prohibited Activities:** The name **Mayie** must not be used in any kind of illegal activities, violence, nudity, or anything related to such activities.
+1. **Association:** The name **Krysanne** must only be used in projects officially related to Master Piece of Paper, as it is a name deeply personal to the author/creator of this project (Ryann Kim M. Sesgundo).
+2. **Prohibited Activities:** The name **Krysanne** must not be used in any kind of illegal activities, violence, nudity, or anything related to such activities.
 3. **Core Purpose:** The name must strictly pertain to promoting peace, love, and offering support to anyone who is in need.
 4. **Reason:** To preserve trust in the name and ensure users feel safe and comfortable. While the creator does not claim exclusive ownership of the name itself, this policy is meant to prevent any doubt about its integrity and supportive purpose.
 
