@@ -54,7 +54,8 @@ export default async function auto(api: TelegramBot, event: EventInterface, body
   while (data === null) {
     try {
       const response = await axios.post("https://openrouter.ai/api/v1/chat/completions", {
-        "model": "openai/gpt-oss-20b:free",
+        // "model": "openai/gpt-oss-20b:free",
+        "model": "google/gemma-4-26b-a4b-it",
         "messages": messages,
         "stream": false
       }, {
