@@ -13,6 +13,13 @@ export default function APIProcess(api: TelegramBot) {
       "text", "animation", "audio", "document", "photo", "video"
     ]
 
+    if (event.forum_topic_closed) {
+      console.log("Topic Closed Event Detected:", event);
+    }
+    if ((event as any).forum_topic_deleted) {
+      console.log("Topic Deleted Event Detected:", event);
+    }
+
     if (event.caption) {
       event.text = event.caption
     }
@@ -21,6 +28,5 @@ export default function APIProcess(api: TelegramBot) {
       core(api, event, event.text ?? "")
     }
   })
-
-
 }
+

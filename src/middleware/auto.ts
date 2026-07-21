@@ -49,7 +49,7 @@ export default async function auto(api: TelegramBot, event: EventInterface, body
   })
 
   const { data } = await axios.post("https://openrouter.ai/api/v1/chat/completions", {
-    "model": "tencent/hy3:free",
+    "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
     "messages": messages,
     "stream": false
   }, {

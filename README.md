@@ -31,8 +31,9 @@
     *   `guitar`: Searches and fetches song lyrics and guitar chords when users want to play music.
     *   `imgen`: Generates stunning images on the fly via the Lumenfall API.
     *   `new-thread`: Creates and manages new Telegram forum topics dynamically.
+    *   `weather`: Fetches real-time weather reports for a given city or location via wttr.in.
 *   **Flexible Setup:** Supports both production-ready **Webhooks** (using Express) and rapid-development **Long Polling**.
-*   **OpenRouter Integration:** Leverages any free or premium LLMs available through OpenRouter (defaults to `tencent/hy3:free`).
+*   **OpenRouter Integration:** Leverages any free or premium LLMs available through OpenRouter (defaults to `nvidia/nemotron-3-ultra-550b-a55b:free`).
 
 ---
 
@@ -67,7 +68,7 @@ Krysanne communicates in a structured JSON format to coordinate conversation and
 ```json
 {
   "message": "A human-readable explanation or chat response.",
-  "command": "clear-chat | verse | guitar | imgen | new-thread | (empty)",
+  "command": "clear-chat | verse | guitar | imgen | new-thread | weather | (empty)",
   "parameter": "Arguments or search query for the command",
   "title": "Optional topic title (e.g., for creating or renaming forum topics)"
 }
@@ -154,21 +155,24 @@ If `WEBHOOK_URL` is omitted, the bot will fall back automatically to **long poll
 krysanne/
 ├── data/               # Persistent conversational datasets (git-ignored)
 ├── src/
-│   ├── index.ts        # Bot initialization & polling/webhook routing
-│   ├── core.ts         # Event router and start action handler
-│   ├── interface.ts    # TypeScript definitions for AI responses
-│   ├── prompt.md       # Core identity & system prompt for Krysanne
+│   ├── index.ts        # Bot initialization & routing (Webhook/Polling)
+│   ├── interface.ts    # TypeScript definitions for structures
+│   ├── rules.md        # Core identity & system prompt rules for Krysanne
 │   ├── middleware/
-│   │   └── auto.ts     # AI integration, conversational history management & dynamic routing
+│   │   ├── api-process.ts # Handles and pre-filters incoming Telegram events
+│   │   ├── core.ts     # Command-level event router (/start handler)
+│   │   └── auto.ts     # AI model integration & dynamic routing logic
 │   ├── script/         # Extensible command modules loaded dynamically on execution
-│   │   ├── clear-chat.ts   # Handler for resetting conversation state
-│   │   ├── guitar.ts       # Ultimate Guitar chords retrieval
-│   │   ├── imgen.ts        # Image generation using Lumenfall API
-│   │   ├── new-thread.ts   # Handler for creating new forum topics
-│   │   └── verse.ts        # Bible Gateway verse scraping
+│   │   ├── clear-chat.ts # Reset and clear conversational history
+│   │   ├── guitar.ts   # Ultimate Guitar chords scraper
+│   │   ├── imgen.ts    # Lumenfall API image generator
+│   │   ├── new-thread.ts # Telegram forum topic creator
+│   │   ├── verse.ts    # Bible Gateway verse scraper
+│   │   └── weather.ts  # Real-time weather fetcher via wttr.in
 │   └── utils/
-│       ├── console.ts      # Stylized terminal logger
-│       └── md-extractor.ts # Utility for parsing commands from AI markdown
+│       ├── console.ts  # Stylized terminal logger
+│       ├── gist.ts     # GitHub Secret Gist integration module
+│       └── md-extractor.ts # Parsing commands from AI markdown/JSON
 ├── LICENSE.md          # ECL-2.0 Licensing details
 └── package.json        # Project scripts and dependencies
 ```

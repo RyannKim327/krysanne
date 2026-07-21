@@ -48,6 +48,7 @@
               <li><code>guitar</code>: Searches and fetches song lyrics and guitar chords when users want to play music.</li>
               <li><code>imgen</code>: Generates stunning images on the fly via the Lumenfall API.</li>
               <li><code>new-thread</code>: Creates and manages new Telegram forum topics dynamically.</li>
+              <li><code>weather</code>: Fetches real-time weather reports for a given city or location via wttr.in.</li>
             </ul>
           </li>
           <li><strong>Flexible Setup:</strong> Supports both production-ready Webhooks (using Express) and rapid-development Long Polling.</li>
@@ -77,7 +78,7 @@
         <p>Krysanne communicates in a structured JSON format to coordinate conversation and perform actions. Every response is parsed by a Markdown/JSON extractor to route command execution:</p>
         <pre><code>{
   "message": "A human-readable explanation or chat response.",
-  "command": "clear-chat | verse | guitar | imgen | new-thread | (empty)",
+  "command": "clear-chat | verse | guitar | imgen | new-thread | weather | (empty)",
   "parameter": "Arguments or search query for the command",
   "title": "Optional topic title (e.g., for creating or renaming forum topics)"
 }</code></pre>
