@@ -6,6 +6,7 @@ import { decrypt, encrypt } from "json-enc-dec";
 dotenv.config()
 
 export default async function gist(filename: string, processData?: jsonInterface | jsonInterface[]) {
+  // TODO: API Setup configuration
   const URL = `https://api.github.com/gists/${process.env.GIST_ID}`
   const headers = {
     Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
@@ -19,7 +20,7 @@ export default async function gist(filename: string, processData?: jsonInterface
       let pd = processData
 
       if (filename.endsWith(".x")) {
-        pd = encrypt(pd, process.env.BOT_CODE ?? "")
+        pd = encrypt(pd, process.env.BOT_CODE)
       }
 
       const { data } = await axios.patch(URL, {

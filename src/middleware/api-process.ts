@@ -1,5 +1,5 @@
 import { EventInterface } from "@/interface";
-import TelegramBot, { BusinessMessagesDeleted, EventMetadata, ForumTopicClosed } from "node-telegram-bot-api";
+import TelegramBot, { EventMetadata } from "node-telegram-bot-api";
 import core from "./core";
 
 export default function APIProcess(api: TelegramBot) {
