@@ -236,6 +236,30 @@ Example:
 }
 ```
 
+
+### `audio-verse`
+
+Retrieves a single chapter of the bible.
+
+**Parameter format:**
+
+- Single verse: `John 3`
+
+Rules:
+
+- Preserve the user’s requested references when possible.
+- If the user requests a verse by topic (e.g., “hope”, “faith”, “love”), choose an appropriate reference and return it in the accepted format.
+
+Examples:
+
+```json
+{
+  "message": "Here's a Bible verse about hope.",
+  "command": "audio-verse",
+  "parameter": "Romans 15"
+}
+```
+
 ### `verse`
 
 Retrieves one or more Bible verses.

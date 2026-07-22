@@ -26,10 +26,10 @@ export default async function gist(filename: string, processData?: jsonInterface
   try {
     if (processData) {
       // TODO: Update Data
-      let pd = processData
+      let pd: string | jsonInterface | jsonInterface[] = processData
 
       if (filename.endsWith(".x")) {
-        pd = encrypt(pd, process.env.BOT_CODE)
+        pd = encrypt(pd, process.env.BOT_CODE) as string
       }
 
       const { data } = await axios.patch(URL, {
