@@ -6,8 +6,8 @@
 
 import TelegramBot from "node-telegram-bot-api";
 
-export default async function drinkWater(api: TelegramBot, userId: number) {
-  const message = await api.sendMessage(userId, "Hello, please don't forget to drink water. An automated reminder")
+export default async function drinkWater(api: TelegramBot, userId: number, name: string) {
+  const message = await api.sendMessage(userId, `Hello ${name}, please don't forget to drink water. An automated reminder`)
 
   setTimeout(() => {
     api.deleteMessage(message.chat.id, message.message_id)
