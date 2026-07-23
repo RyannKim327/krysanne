@@ -5,6 +5,7 @@ declare namespace NodeJS {
     BOT_CODE: string
     LUMENFALL_API: string
     GIST_ID: string
-    GITHUB_TOKEN: string
+    GITHUB_TOKEN: string,
+    WEBHOOK_URL?: string
   }
 }
