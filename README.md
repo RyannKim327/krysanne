@@ -23,8 +23,9 @@
 
 *   **Empathetic Listening:** Engineered to act as a supportive companion, offering active listening and a compassionate outlet for users.
 *   **Persistent Chat Memory (GitHub Secret Gist):** Retains conversational context securely per Telegram `chat.id` using a secure, private GitHub Secret Gist. This keeps data private and ensures chat history persists across server restarts.
-*   **Planned Data Encryption:** An encryptor layer (utilizing the `json-enc-dec` package and `BOT_CODE` key) is currently prepared and will be fully applied in future updates to encrypt conversational logs in the Gist store, ensuring maximum cryptographic privacy.
+*   **Data Encryption:** An encryptor layer (utilizing the `json-enc-dec` package and `BOT_CODE` key) is currently prepared and will be fully applied in future updates to encrypt conversational logs in the Gist store, ensuring maximum cryptographic privacy.
 *   **Dynamic Command Routing:** Commands generated in structured AI JSON responses are dynamically matched, imported, and executed from modular scripts in the `src/script/` directory.
+*   **Automated Cron Reminders & Daily Care:** Built-in background task scheduler using `node-cron` (`Asia/Manila` timezone) that automatically delivers periodic hydration reminders throughout the day and sends inspirational daily Bible verses every morning.
 *   **Extensible Built-in Commands:**
     *   `clear-chat`: Resets/clears the conversational history for a fresh start.
     *   `verse`: Scrapes and retrieves motivational Bible verses based on user request/state.
@@ -46,6 +47,7 @@
 *   **API Client:** [Axios](https://github.com/axios/axios) (to communicate with OpenRouter)
 *   **Bible Scraping:** [biblegateway-scrape](https://www.npmjs.com/package/biblegateway-scrape) (to extract verses on demand)
 *   **Guitar Chords:** [ultimate-guitar](https://www.npmjs.com/package/ultimate-guitar) (to retrieve songs and chords)
+*   **Task Scheduler:** [node-cron](https://www.npmjs.com/package/node-cron) (for managing timezone-aware background cron schedules)
 
 ---
 
@@ -75,6 +77,19 @@ Krysanne communicates in a structured JSON format to coordinate conversation and
 ```
 
 This design dynamically triggers scripts in `src/script/` corresponding to the command name (e.g., `imgen` will dynamically load and run `src/script/imgen.ts`).
+
+---
+
+## ⏰ Automated Cron Features & Reminders
+
+Krysanne includes an automated background cron scheduling system powered by `node-cron` configured to the `Asia/Manila` timezone (`src/cron/`). It dynamically retrieves registered users from the private GitHub Secret Gist (`users.json`) and delivers scheduled automated messages:
+
+*   **Hydration Reminders (`drink-water.ts`)**:
+    *   **Schedule:** Triggers at 7:00 AM, 8:00 AM, 10:00 AM, 12:00 PM, 2:00 PM, 4:00 PM, 6:00 PM, and 8:00 PM daily (`0 7,8,10,12,14,16,18,20 * * *`).
+    *   **Behavior:** Sends a friendly reminder to each registered user to stay hydrated. To keep chat feeds clean and uncluttered, the notification automatically deletes itself after 5 minutes (300,000 ms).
+*   **Daily Morning Bible Verses (`verse.ts`)**:
+    *   **Schedule:** Triggers every morning at 7:30 AM (`30 7 * * *`).
+    *   **Behavior:** Fetches and delivers the daily scripture verse (New International Version) via `biblegateway-scrape` to offer morning inspiration and comfort.
 
 ---
 
@@ -158,6 +173,10 @@ krysanne/
 │   ├── index.ts        # Bot initialization & routing (Webhook/Polling)
 │   ├── interface.ts    # TypeScript definitions for structures
 │   ├── rules.md        # Core identity & system prompt rules for Krysanne
+│   ├── cron/           # Background scheduler and automated task routines
+│   │   ├── index.ts    # Central cron manager & schedule definitions (Asia/Manila timezone)
+│   │   ├── drink-water.ts # Scheduled hydration reminder with auto-cleanup (5 min)
+│   │   └── verse.ts    # Daily morning Bible verse fetcher and delivery
 │   ├── middleware/
 │   │   ├── api-process.ts # Handles and pre-filters incoming Telegram events
 │   │   ├── core.ts     # Command-level event router (/start handler)

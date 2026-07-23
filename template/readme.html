@@ -39,8 +39,9 @@
         <ul>
           <li><strong>Empathetic Listening:</strong> Engineered to act as a supportive companion, offering active listening and a compassionate outlet for users.</li>
           <li><strong>Persistent Chat Memory (GitHub Secret Gist):</strong> Retains conversational context securely per Telegram <code>chat.id</code> using a secure, private GitHub Secret Gist. This keeps data private and ensures chat history persists across server restarts.</li>
-          <li><strong>Planned Data Encryption:</strong> An encryptor layer (utilizing the <code>json-enc-dec</code> package and <code>BOT_CODE</code> key) is currently prepared and will be fully applied in future updates to encrypt conversational logs in the Gist store, ensuring maximum cryptographic privacy.</li>
+          <li><strong>Data Encryption:</strong> An encryptor layer (utilizing the <code>json-enc-dec</code> package and <code>BOT_CODE</code> key) is currently prepared and will be fully applied in future updates to encrypt conversational logs in the Gist store, ensuring maximum cryptographic privacy.</li>
           <li><strong>Dynamic Command Routing:</strong> Commands generated in structured AI JSON responses are dynamically matched, imported, and executed from modular scripts in the <code>src/script/</code> directory.</li>
+          <li><strong>Automated Cron Reminders & Daily Care:</strong> Built-in background task scheduler using <code>node-cron</code> (<code>Asia/Manila</code> timezone) that automatically delivers periodic hydration reminders throughout the day and sends inspirational daily Bible verses every morning.</li>
           <li><strong>Extensible Built-in Commands:</strong>
             <ul>
               <li><code>clear-chat</code>: Resets/clears the conversational history for a fresh start.</li>
@@ -72,6 +73,10 @@
             <div class="tech-card-title">Express 5</div>
             <div class="tech-card-desc">Web application framework serving webhook endpoints and static SPA layouts.</div>
           </div>
+          <div class="tech-card">
+            <div class="tech-card-title">node-cron</div>
+            <div class="tech-card-desc">Timezone-aware background task scheduler for automated reminders and recurring tasks.</div>
+          </div>
         </div>
 
         <h2>🤖 JSON-Driven Command Routing</h2>
@@ -82,6 +87,23 @@
   "parameter": "Arguments or search query for the command",
   "title": "Optional topic title (e.g., for creating or renaming forum topics)"
 }</code></pre>
+
+        <h2>⏰ Automated Cron Features & Reminders</h2>
+        <p>Krysanne includes an automated background cron scheduling system powered by <code>node-cron</code> configured to the <code>Asia/Manila</code> timezone (<code>src/cron/</code>). It dynamically retrieves registered users from the private GitHub Secret Gist (<code>users.json</code>) and delivers scheduled automated messages:</p>
+        <ul>
+          <li><strong>Hydration Reminders (<code>drink-water.ts</code>):</strong>
+            <ul>
+              <li><strong>Schedule:</strong> Triggers at 7:00 AM, 8:00 AM, 10:00 AM, 12:00 PM, 2:00 PM, 4:00 PM, 6:00 PM, and 8:00 PM daily (<code>0 7,8,10,12,14,16,18,20 * * *</code>).</li>
+              <li><strong>Behavior:</strong> Sends a friendly reminder to each registered user to stay hydrated. To keep chat feeds clean and uncluttered, the notification automatically deletes itself after 5 minutes (300,000 ms).</li>
+            </ul>
+          </li>
+          <li><strong>Daily Morning Bible Verses (<code>verse.ts</code>):</strong>
+            <ul>
+              <li><strong>Schedule:</strong> Triggers every morning at 7:30 AM (<code>30 7 * * *</code>).</li>
+              <li><strong>Behavior:</strong> Fetches and delivers the daily scripture verse (New International Version) via <code>biblegateway-scrape</code> to offer morning inspiration and comfort.</li>
+            </ul>
+          </li>
+        </ul>
 
         <h2>🚀 Quick Start</h2>
         <h3>1. Installation</h3>
