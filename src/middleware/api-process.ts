@@ -10,20 +10,22 @@ import { EventInterface } from "@/interface";
 import TelegramBot, { EventMetadata } from "node-telegram-bot-api";
 import core from "./core";
 import mainCron from "@/cron";
+import lastChat from "./last-chat";
 
-export default function APIProcess(api: TelegramBot) {
+export default async function APIProcess(api: TelegramBot) {
   mainCron(api)
 
-  api.on("edited_message", (event: EventInterface) => {
+  // TODO: Edit messages and caption
+  api.on("edited_message", async (event: EventInterface) => {
     if (event.caption) {
       event.text = event.caption
     }
-
-    core(api, event, event.text ?? "")
+    await core(api, event, event.text ?? "")
+    await lastChat(event)
   })
 
-  // TODO: Messaging
-  api.on("message", (event: EventInterface, metadata: EventMetadata) => {
+  // TODO: Messaging and uploading files
+  api.on("message", async (event: EventInterface, metadata: EventMetadata) => {
     // TODO: To include the metadata in the event for single fetch
     event['metadata'] = metadata
 
@@ -44,7 +46,8 @@ export default function APIProcess(api: TelegramBot) {
     }
 
     if (metatypes.includes(metadata.type ?? "")) {
-      core(api, event, event.text ?? "")
+      await core(api, event, event.text ?? "")
+      await lastChat(event)
     }
   })
 }
