@@ -11,6 +11,7 @@ import * as dotenv from "dotenv"
 import axios from "axios";
 import { jsonInterface } from "@/interface";
 import { decrypt, encrypt } from "json-enc-dec";
+import log from "./console";
 
 dotenv.config()
 
@@ -28,8 +29,13 @@ export default async function gist(filename: string, processData?: jsonInterface
       // TODO: Update Data
       let pd: string | jsonInterface | jsonInterface[] = processData
 
-      if (filename.endsWith(".x")) {
+      if (!filename.endsWith(".json")) {
         pd = encrypt(pd, process.env.BOT_CODE) as string
+      }
+
+      // TODO: To convert from JSON to string
+      if (typeof pd !== "string") {
+        pd = JSON.stringify(pd, null, 2)
       }
 
       const { data } = await axios.patch(URL, {
@@ -53,20 +59,19 @@ export default async function gist(filename: string, processData?: jsonInterface
       const { data } = await axios.get(URL, {
         headers
       })
+
       if (!data.files[filename]) {
         throw new Error(`The file ${filename} is not existed in the gist data`)
       }
 
-      if (filename.endsWith(".x")) {
-        const d = decrypt(data.files[filename].content, process.env.BOT_CODE)
-        return d
+      if (!filename.endsWith(".json")) {
+        return decrypt(data.files[filename].content, process.env.BOT_CODE)
       }
 
       return JSON.parse(data.files[filename].content)
     }
   } catch (e) {
-    return {
-      error: e?.toString()
-    }
+    log(`GIST [${filename}]`, e.toString(), "e")
+    return {}
   }
 }
