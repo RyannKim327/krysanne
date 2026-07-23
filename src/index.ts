@@ -9,7 +9,7 @@ function main() {
   dotenv.config()
 
   const token = process.env.TELEGRAM_TOKEN
-  const url = process.env.WEBHOOK_URL
+  let url = process.env.WEBHOOK_URL
 
   if (!token) {
     return log("Index", "Token is missing", "e")
@@ -48,6 +48,11 @@ function main() {
     let api: TelegramBot | null = null
 
     if (url) {
+
+      if (url.endsWith("/")) {
+        url = url.substring(0, url.length - 1)
+      }
+
       // TODO: Webhook setup
       api = new TelegramBot(token)
       api.setWebhook(`${url}/bot${token}`)
@@ -56,7 +61,6 @@ function main() {
         api?.processUpdate(req.body)
         res.sendStatus(200)
       })
-
       log("Server Initiator", "Telegram configured using Webhook")
     } else {
       // TODO: Polling Setup
