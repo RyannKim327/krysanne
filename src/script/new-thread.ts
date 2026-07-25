@@ -8,20 +8,40 @@
  * annoying.
  */
 
+import { TELEGRAM } from "@/contants";
 import { aiResponse, EventInterface } from "@/interface";
+import gist from "@/utils/gist";
 import TelegramBot from "node-telegram-bot-api";
 
 export default async function script(api: TelegramBot, event: EventInterface, body: aiResponse) {
   if (api) {
-    const nt = await api.createForumTopic(event.chat.id, body.title ?? "New Thread")
+    const title = body.title ?? "New Thread";
+    const nt = await api.createForumTopic(event.chat.id, title);
 
-    api.sendMessage(event.chat.id, body.message, {
-      message_thread_id: nt.message_thread_id,
-    })
+    const pastRequestMessage = event.text || body.parameter || "";
 
-    return {
-      text: body.message
+    if (pastRequestMessage) {
+      await api.sendMessage(event.chat.id, pastRequestMessage, {
+        message_thread_id: nt.message_thread_id,
+      });
     }
+
+    await api.sendMessage(event.chat.id, body.message, {
+      message_thread_id: nt.message_thread_id,
+    });
+
+    try {
+      const newThreadKey = `${event.chat.id}_${nt.message_thread_id}`;
+      const store = await gist(TELEGRAM);
+      store[newThreadKey] = [
+        ...(pastRequestMessage ? [{ role: "user", content: pastRequestMessage }] : []),
+        { role: "assistant", content: body.message }
+      ];
+      await gist(TELEGRAM, store);
+    } catch (e) { }
+
+    return {};
   }
-  return {}
+  return {};
 }
+

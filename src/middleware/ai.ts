@@ -17,19 +17,16 @@ import TelegramBot from "node-telegram-bot-api"
 interface aiInterface {
   dataset: aiParams[]
   type: string
-  extras?: {
-    role: string,
-    content: string
-  }
+  extras?: aiParams
   api?: TelegramBot,
   event?: EventInterface
 }
 
-export default async function artificialInteligence(body: string, user: string | number, p: aiInterface): Promise<({ messages: aiParams[], extract: aiResponse })> {
+export default async function artificialInteligence(body: string, user: string | number, p: aiInterface): Promise<({ messages: aiParams[], extract: aiResponse, src?: ScriptInterface })> {
   const store = p.dataset
   const admins = await gist(ADMIN)
 
-  const messages = [
+  const messages: aiParams[] = [
     {
       "role": "system",
       "content": readFileSync("src/rules.md", "utf-8")
