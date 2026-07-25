@@ -759,6 +759,18 @@
           }
         }
 
+        // Set missing titles on loaded history threads
+        if (threads && threads.length > 0) {
+          threads.forEach(t => {
+            if ((!t.title || t.title === "New Thread") && t.messages && t.messages.length > 0) {
+              const firstUserMsg = t.messages.find(m => m.role === "user");
+              if (firstUserMsg) {
+                t.title = truncateTitle(firstUserMsg.content);
+              }
+            }
+          });
+        }
+
         if (!threads || threads.length === 0) {
           createNewThread(false);
         } else {
@@ -854,7 +866,7 @@
             <i class="fa-solid fa-robot"></i>
           </div>
           <div class="message-bubble">
-            ${text}
+            ${text.replace(/\n/g, "<br>")}
             <span class="message-time">${time || getCurrentTime()}</span>
           </div>
         `;
@@ -927,7 +939,8 @@
         }));
 
         try {
-          const response = await fetch("https://krysanne.onrender.com/api/chat", {
+          const apiEndpoint = window.location.origin.includes("localhost") || window.location.origin.includes("127.0.0.1") || window.location.port ? "/api/chat" : "https://krysanne.onrender.com/api/chat";
+          const response = await fetch(apiEndpoint, {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -942,33 +955,66 @@
 
           if (response && response.extract && response.extract.message) {
             const botTime = getCurrentTime();
-            active.messages.push({
-              role: "assistant",
-              content: response.extract.message,
-              time: botTime
-            });
-            appendBotMessageDOM(response.extract.message, botTime);
-
-            if (response.extract.title) {
-              active.title = response.extract.title;
-              titleSpan.textContent = response.extract.title;
-            }
 
             if (response.extract.command === "clear-chat") {
               clearCurrentThreadMessages();
-            } else if (response.src && response.src.text) {
+            } else if (response.extract.command === "new-thread") {
+              // Remove the past request from old thread since it belongs in the new thread
+              active.messages.pop();
+
+              const botContent = (response.src && response.src.text) ? response.src.text : response.extract.message;
+              const newTitle = response.extract.title || truncateTitle(text);
+              const newId = "thread_" + Date.now();
+              const newThread = {
+                id: newId,
+                title: newTitle,
+                createdAt: Date.now(),
+                updatedAt: Date.now(),
+                messages: [
+                  {
+                    role: "user",
+                    content: text,
+                    time: userTime
+                  },
+                  {
+                    role: "assistant",
+                    content: botContent,
+                    time: botTime
+                  }
+                ]
+              };
+              threads.unshift(newThread);
+              activeThreadId = newId;
+              saveThreads();
+              renderThreadList();
+              renderActiveThreadMessages();
+            } else {
+              if (response.extract.title) {
+                active.title = response.extract.title;
+                titleSpan.textContent = response.extract.title;
+                messagesContainer.innerHTML += `
+                  <div class="message-divider">
+                    <span>Krysanne named the session • ${escapeHtml(response.extract.title)}</span>
+                  </div>
+                `;
+              }
+
+              const botContent = (response.src && response.src.text) ? response.src.text : response.extract.message;
               active.messages.push({
                 role: "assistant",
-                content: response.src.text,
+                content: botContent,
                 time: botTime
               });
-              appendBotMessageDOM(response.src.text, botTime);
+              appendBotMessageDOM(botContent, botTime);
             }
           }
 
-          active.updatedAt = Date.now();
-          saveThreads();
-          renderThreadList();
+          active = getActiveThread();
+          if (active) {
+            active.updatedAt = Date.now();
+            saveThreads();
+            renderThreadList();
+          }
           scrollToBottom();
         } catch (err) {
           removeTypingIndicator();
