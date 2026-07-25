@@ -130,6 +130,7 @@
 
       // Mapping hashes to template files
       const routes = {
+        "chat": "template/chat.html",
         "home": "template/home.html",
         "readme": "template/readme.html",
         "privacy": "template/privacy.html",
@@ -160,7 +161,8 @@
         else if (hash === "readme") currentId = "nav-readme";
         else if (hash === "contributors") currentId = "nav-contributors";
         else if (hash === "license") currentId = "nav-license";
-
+        else if (hash === "chat") currentId = "nav-chat";
+              
         document.querySelectorAll(".nav-links .nav-link").forEach(link => {
           link.classList.remove("active");
         });
