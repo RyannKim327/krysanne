@@ -22,3 +22,8 @@ export interface ScriptInterface {
   image?: string,
   video?: string
 }
+
+export interface aiParams {
+  role: "system" | "assistant" | "user",
+  content: string
+}

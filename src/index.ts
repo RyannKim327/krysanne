@@ -4,6 +4,7 @@ import log from "./utils/console";
 import express, { Express, Request, Response } from "express"
 import path from "path";
 import APIProcess from "./middleware/api-process";
+import artificialInteligence from "./middleware/ai";
 
 function main() {
   dotenv.config()
@@ -44,6 +45,16 @@ function main() {
     app.get("/readme", sendIndex)
     app.get("/contributors", sendIndex)
     app.get("/license", sendIndex)
+
+    app.post("/api/chat", async (req: Request, res: Response) => {
+      const body = req.body
+      const data = await artificialInteligence(body.message, "", {
+        type: "web",
+        dataset: body.history
+      })
+
+      res.json(data)
+    })
 
     let api: TelegramBot | null = null
 
