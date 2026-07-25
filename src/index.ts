@@ -5,6 +5,7 @@ import express, { Express, Request, Response } from "express"
 import path from "path";
 import APIProcess from "./middleware/api-process";
 import artificialInteligence from "./middleware/ai";
+import cors from "cors"
 
 function main() {
   dotenv.config()
@@ -29,6 +30,7 @@ function main() {
 
   try {
     const app: Express = express()
+    app.use(cors())
     app.use(express.json())
 
     // Serve static files from the template directory under the /template path
