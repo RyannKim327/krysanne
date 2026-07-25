@@ -527,6 +527,29 @@
       opacity: 0.7;
     }
 
+    .message-image-wrapper {
+      margin-top: 0.75rem;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .chat-generated-img {
+      max-width: 100%;
+      max-height: 380px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      display: block;
+      object-fit: cover;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      transition: transform 0.25s ease, filter 0.25s ease;
+      cursor: pointer;
+    }
+
+    .chat-generated-img:hover {
+      transform: scale(1.015);
+      filter: brightness(1.05);
+    }
+
     @media (max-width: 768px) {
       .chat-wrapper {
         height: calc(100vh - 100px);
@@ -613,6 +636,9 @@
           </button>
           <button class="chip-btn" data-text="Get guitar chords for a song">
             <i class="fa-solid fa-guitar"></i> Guitar Chords
+          </button>
+          <button class="chip-btn" data-text="Generate an image of a peaceful sunset over mountains">
+            <i class="fa-solid fa-image"></i> Generate Image
           </button>
           <button class="chip-btn" data-text="What can you do to help me today?">
             <i class="fa-solid fa-circle-question"></i> Help & Commands
@@ -838,7 +864,7 @@
             if (msg.role === "user") {
               appendUserMessageDOM(msg.content, msg.time);
             } else {
-              appendBotMessageDOM(msg.content, msg.time);
+              appendBotMessageDOM(msg.content, msg.time, msg.image);
             }
           });
         }
@@ -858,15 +884,36 @@
         messagesContainer.appendChild(row);
       };
 
-      const appendBotMessageDOM = (text, time) => {
+      const appendBotMessageDOM = (text, time, imageUrl) => {
         const row = document.createElement("div");
         row.className = "message-row bot";
+
+        let innerContent = "";
+        if (text) {
+          innerContent += `<div>${text.replace(/\n/g, "<br>")}</div>`;
+        }
+        if (imageUrl) {
+          innerContent += `
+            <div class="message-image-wrapper">
+              <a href="${escapeHtml(imageUrl)}" target="_blank" rel="noopener noreferrer" title="Click to view full image">
+                <img 
+                  src="${escapeHtml(imageUrl)}" 
+                  alt="Generated image" 
+                  class="chat-generated-img"
+                  onload="window.scrollToBottom ? window.scrollToBottom() : null"
+                  onerror="this.onerror=null; this.parentElement.innerHTML='<span style=\\'color:var(--text-muted);font-size:0.85rem;\\'>[Image failed to load]</span>';"
+                />
+              </a>
+            </div>
+          `;
+        }
+
         row.innerHTML = `
           <div class="msg-avatar">
             <i class="fa-solid fa-robot"></i>
           </div>
           <div class="message-bubble">
-            ${text.replace(/\n/g, "<br>")}
+            ${innerContent}
             <span class="message-time">${time || getCurrentTime()}</span>
           </div>
         `;
@@ -963,6 +1010,7 @@
               active.messages.pop();
 
               const botContent = (response.src && response.src.text) ? response.src.text : response.extract.message;
+              const imageUrl = (response.src && response.src.image) ? response.src.image : null;
               const newTitle = response.extract.title || truncateTitle(text);
               const newId = "thread_" + Date.now();
               const newThread = {
@@ -979,6 +1027,7 @@
                   {
                     role: "assistant",
                     content: botContent,
+                    image: imageUrl,
                     time: botTime
                   }
                 ]
@@ -1000,12 +1049,15 @@
               }
 
               const botContent = (response.src && response.src.text) ? response.src.text : response.extract.message;
+              const imageUrl = (response.src && response.src.image) ? response.src.image : null;
+
               active.messages.push({
                 role: "assistant",
                 content: botContent,
+                image: imageUrl,
                 time: botTime
               });
-              appendBotMessageDOM(botContent, botTime);
+              appendBotMessageDOM(botContent, botTime, imageUrl);
             }
           }
 

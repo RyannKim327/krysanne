@@ -15,7 +15,6 @@ import lastChat from "./last-chat";
 export default async function APIProcess(api: TelegramBot) {
   mainCron(api)
 
-  // TODO: Edit messages and caption
   api.on("edited_message", async (event: EventInterface) => {
     if (event.caption) {
       event.text = event.caption
@@ -24,7 +23,7 @@ export default async function APIProcess(api: TelegramBot) {
     await lastChat(event)
   })
 
-  // TODO: Messaging and uploading files
+  // TODO: Messaging
   api.on("message", async (event: EventInterface, metadata: EventMetadata) => {
     // TODO: To include the metadata in the event for single fetch
     event['metadata'] = metadata

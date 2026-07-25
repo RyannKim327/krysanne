@@ -88,7 +88,7 @@ export default async function artificialInteligence(body: string, user: string |
 
   if (existsSync(`src/script/${extract.command}.ts`)) {
     const { default: script } = await import(`@/script/${extract.command}`)
-    src = await script(p.api, p.event, extract) as ScriptInterface
+    src = await script(extract, p.api, p.event) as ScriptInterface
   }
 
   return {

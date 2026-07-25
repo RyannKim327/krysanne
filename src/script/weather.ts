@@ -6,20 +6,20 @@
  * whether it is hot or not.
  */
 
-import { aiResponse } from "@/interface";
+import { aiResponse, EventInterface } from "@/interface";
 import axios from "axios";
-import TelegramBot, { Message } from "node-telegram-bot-api";
+import TelegramBot from "node-telegram-bot-api";
 
-export default async function script(api: TelegramBot, event: Message, body: aiResponse) {
+export default async function script(body: aiResponse, api?: TelegramBot, event?: EventInterface) {
   let msg
-  if (api) {
+  if (api && event) {
     msg = await api.sendMessage(event.chat.id, body.message, {
       message_thread_id: event.message_thread_id
     })
   }
   const { data } = await axios.get(`https://wttr.in/${body.parameter}?format=4`)
 
-  if (api && msg) {
+  if (api && event && msg) {
     api.deleteMessage(msg?.chat.id, msg?.message_id)
   }
 

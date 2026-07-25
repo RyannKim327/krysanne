@@ -9,7 +9,7 @@ import { aiResponse, EventInterface } from "@/interface";
 import { audio, audio_version } from "biblegateway-scrape";
 import TelegramBot from "node-telegram-bot-api";
 
-export default async function script(api: TelegramBot, event: EventInterface, body: aiResponse) {
+export default async function script(body: aiResponse, api?: TelegramBot, event?: EventInterface) {
   const response = await audio(body.parameter, audio_version.NIV_DRAMATIZED)
 
   let copyright = ""

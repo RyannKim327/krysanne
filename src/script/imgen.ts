@@ -13,11 +13,13 @@ import TelegramBot from "node-telegram-bot-api";
 dotenv.config()
 
 
-export default async function script(api: TelegramBot, event: EventInterface, body: aiResponse) {
+export default async function script(body: aiResponse, api?: TelegramBot, event?: EventInterface) {
 
-  api.sendMessage(event.chat.id, body.message, {
-    message_thread_id: event.reply_to_message?.message_thread_id
-  })
+  if (api && event) {
+    api.sendMessage(event.chat.id, body.message, {
+      message_thread_id: event.reply_to_message?.message_thread_id
+    })
+  }
 
   const { data } = await axios.post("https://api.lumenfall.ai/openai/v1/images/generations", {
     "model": "gemini-3.1-flash-lite-image",

@@ -13,8 +13,8 @@ import { aiResponse, EventInterface } from "@/interface";
 import gist from "@/utils/gist";
 import TelegramBot from "node-telegram-bot-api";
 
-export default async function script(api: TelegramBot, event: EventInterface, body: aiResponse) {
-  if (api) {
+export default async function script(body: aiResponse, api?: TelegramBot, event?: EventInterface) {
+  if (api && event) {
     const title = body.title ?? "New Thread";
     const nt = await api.createForumTopic(event.chat.id, title);
 

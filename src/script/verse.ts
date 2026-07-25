@@ -9,7 +9,7 @@ import { aiResponse, EventInterface } from "@/interface";
 import { verse } from "biblegateway-scrape";
 import TelegramBot from "node-telegram-bot-api";
 
-export default async function script(api: TelegramBot, event: EventInterface, body: aiResponse) {
+export default async function script(body: aiResponse, api?: TelegramBot, event?: EventInterface) {
   const response = await verse(body.parameter)
 
   return {
