@@ -6,11 +6,11 @@
  */
 
 import * as dotenv from "dotenv"
-import { existsSync } from "fs";
 import TelegramBot from "node-telegram-bot-api";
-import { EventInterface, ScriptInterface } from "@/interface";
+import { EventInterface } from "@/interface";
 import { TELEGRAM } from "@/contants";
 import artificialInteligence from "./ai";
+import gist from "@/utils/gist";
 
 dotenv.config()
 
@@ -20,6 +20,8 @@ export default async function auto(api: TelegramBot, event: EventInterface, body
   if (event.reply_to_message?.message_thread_id) {
     user += `_${event.reply_to_message?.message_thread_id}`
   }
+
+  const userGist = await gist(TELEGRAM)
 
   let extras
 
@@ -36,11 +38,17 @@ export default async function auto(api: TelegramBot, event: EventInterface, body
     body = `I am replying to: ${event.reply_to_message.text}\n\nNow ${body}`
   }
 
-  const extract = await artificialInteligence(body, event.chat.id, {
-    dataset: TELEGRAM,
+  const { messages, extract, src } = await artificialInteligence(body, event.chat.id, {
+    dataset: userGist[user],
     type: "telegram",
-    extras: extras
+    extras: extras,
+    event: event,
+    api: api
   })
+
+  userGist[user] = messages
+
+  gist(TELEGRAM, userGist)
 
   try {
     await api.sendChatAction(event.chat.id, "typing", {
@@ -52,29 +60,25 @@ export default async function auto(api: TelegramBot, event: EventInterface, body
   // console.log(event)
 
   // TODO: Auto add script method
-  if (existsSync(`src/script/${extract.command}.ts`)) {
-    const { default: script } = await import(`@/script/${extract.command}`)
-    const src: ScriptInterface = await script(api, event, extract) as ScriptInterface
-    if (src.audio) {
-      api.sendAudio(event.chat.id, src.audio, {
-        message_thread_id: event.message_thread_id,
-        caption: src.text ?? ""
-      })
-    } else if (src.image) {
-      api.sendPhoto(event.chat.id, src.image, {
-        message_thread_id: event.message_thread_id,
-        caption: src.text ?? ""
-      })
-    } else if (src.video) {
-      api.sendVideo(event.chat.id, src.video, {
-        message_thread_id: event.message_thread_id,
-        caption: src.text ?? ""
-      })
-    } else if (src.text) {
-      api.sendMessage(event.chat.id, src.text, {
-        message_thread_id: event.message_thread_id
-      })
-    }
+  if (src.audio) {
+    api.sendAudio(event.chat.id, src.audio, {
+      message_thread_id: event.message_thread_id,
+      caption: src.text ?? ""
+    })
+  } else if (src.image) {
+    api.sendPhoto(event.chat.id, src.image, {
+      message_thread_id: event.message_thread_id,
+      caption: src.text ?? ""
+    })
+  } else if (src.video) {
+    api.sendVideo(event.chat.id, src.video, {
+      message_thread_id: event.message_thread_id,
+      caption: src.text ?? ""
+    })
+  } else if (src.text) {
+    api.sendMessage(event.chat.id, src.text, {
+      message_thread_id: event.message_thread_id
+    })
   } else {
     // TODO: default callback
     api.sendMessage(event.chat.id, extract.message, {

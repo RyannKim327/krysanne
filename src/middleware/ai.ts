@@ -6,24 +6,27 @@
  */
 
 import { ADMIN } from "@/contants"
-import { aiResponse } from "@/interface"
+import { aiParams, aiResponse, EventInterface, jsonInterface, ScriptInterface } from "@/interface"
 import log from "@/utils/console"
 import gist from "@/utils/gist"
 import mdExtractor from "@/utils/md-extractor"
 import axios from "axios"
-import { readFileSync } from "fs"
+import { existsSync, readFileSync } from "fs"
+import TelegramBot from "node-telegram-bot-api"
 
 interface aiInterface {
-  dataset: string
+  dataset: aiParams[]
   type: string
   extras?: {
     role: string,
     content: string
   }
+  api?: TelegramBot,
+  event?: EventInterface
 }
 
-export default async function artificialInteligence(body: string, user: string | number, p: aiInterface) {
-  const store = await gist(p.dataset)
+export default async function artificialInteligence(body: string, user: string | number, p: aiInterface): Promise<({ messages: aiParams[], extract: aiResponse })> {
+  const store = p.dataset
   const admins = await gist(ADMIN)
 
   const messages = [
@@ -36,7 +39,7 @@ export default async function artificialInteligence(body: string, user: string |
     }
   ]
 
-  messages.push(...store[user] ?? [])
+  messages.push(...store ?? [])
 
   if (p.extras) {
     messages.push(p.extras)
@@ -84,9 +87,16 @@ export default async function artificialInteligence(body: string, user: string |
   if (p.extras) {
     messages.shift()
   }
+  let src
 
-  store[user] = messages
-  gist(p.dataset, store)
+  if (existsSync(`src/script/${extract.command}.ts`)) {
+    const { default: script } = await import(`@/script/${extract.command}`)
+    src = await script(p.api, p.event, extract) as ScriptInterface
+  }
 
-  return extract
+  return {
+    messages,
+    extract,
+    src
+  }
 }
