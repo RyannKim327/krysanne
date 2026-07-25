@@ -7,7 +7,7 @@
 
 import { aiResponse, EventInterface } from "@/interface";
 import TelegramBot from "node-telegram-bot-api";
-import { category, guitar } from "ultimate-guitar";
+import guitar, { category } from "ultimate-guitar";
 
 export default async function script(api: TelegramBot, event: EventInterface, body: aiResponse) {
   const ug = guitar()

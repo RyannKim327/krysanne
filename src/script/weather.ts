@@ -11,14 +11,17 @@ import axios from "axios";
 import TelegramBot, { Message } from "node-telegram-bot-api";
 
 export default async function script(api: TelegramBot, event: Message, body: aiResponse) {
-
-  const msg = await api.sendMessage(event.chat.id, body.message, {
-    message_thread_id: event.message_thread_id
-  })
-
+  let msg
+  if (api) {
+    msg = await api.sendMessage(event.chat.id, body.message, {
+      message_thread_id: event.message_thread_id
+    })
+  }
   const { data } = await axios.get(`https://wttr.in/${body.parameter}?format=4`)
 
-  api.deleteMessage(msg.chat.id, msg.message_id)
+  if (api && msg) {
+    api.deleteMessage(msg?.chat.id, msg?.message_id)
+  }
 
   return {
     text: `The weather in ${data}`
