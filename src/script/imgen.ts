@@ -15,6 +15,10 @@ dotenv.config()
 
 export default async function script(body: aiResponse, api?: TelegramBot, event?: EventInterface) {
 
+  return {
+    text: "Image generator is still under redevelopment"
+  }
+
   if (api && event) {
     api.sendMessage(event.chat.id, body.message, {
       message_thread_id: event.reply_to_message?.message_thread_id
