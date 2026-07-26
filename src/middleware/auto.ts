@@ -23,7 +23,7 @@ export default async function auto(api: TelegramBot, event: EventInterface, body
 
   const userGist = await gist(TELEGRAM)
 
-  let extras
+  let extras = {}
 
   if (event.from?.username) {
     extras = {

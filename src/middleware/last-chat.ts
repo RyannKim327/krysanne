@@ -16,6 +16,7 @@ export default async function lastChat(event: EventInterface) {
     ...lastchats,
     [event.chat.id]: Date.now()
   }
+
   setTimeout(async () => {
     await gist(LASTCHAT, lastchats ?? {})
   }, 500)
