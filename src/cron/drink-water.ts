@@ -11,5 +11,5 @@ export default async function drinkWater(api: TelegramBot, userId: number, name:
 
   setTimeout(() => {
     api.deleteMessage(message.chat.id, message.message_id)
-  }, 300000)
+  }, 1000 * 60 * 30)
 }

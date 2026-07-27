@@ -9,6 +9,7 @@ import * as dotenv from "dotenv"
 import { aiResponse, EventInterface } from "@/interface";
 import axios from "axios";
 import TelegramBot from "node-telegram-bot-api";
+import { init } from "@heyputer/puter.js/src/init.cjs";
 
 dotenv.config()
 
@@ -20,24 +21,31 @@ export default async function script(body: aiResponse, api?: TelegramBot, event?
   }
 
   if (api && event) {
-    api.sendMessage(event.chat.id, body.message, {
+    event = await api.sendMessage(event.chat.id, body.message, {
       message_thread_id: event.reply_to_message?.message_thread_id
     })
   }
 
-  const { data } = await axios.post("https://api.lumenfall.ai/openai/v1/images/generations", {
-    "model": "gemini-3.1-flash-lite-image",
-    "prompt": body.parameter,
-    "size": "1024x1024"
-  }, {
-    headers: {
-      "Authorization": `Bearer ${process.env.LUMENFALL_API}`,
-      "Content-Type": "application/json"
-    }
-  })
+  const puter = init(process.env.PUTER)
+
+  const data = await puter.ai.txt2img(body.parameter, {
+    model: "gpt-image-1-mini",
+  }).catch(e => { return e })
+
+  if (api && event && data.error) {
+    api.editMessageText(data.error, {
+      chat_id: event.chat.id,
+      message_id: event.message_id
+    })
+  } else if (api && event) {
+    api.deleteMessage(event.chat.id, event.message_id)
+  }
+
+  // const base64 = data.src.replace(/^data:image\/\w+;base64,/, "");
+  // const buffer = Buffer.from(base64, "base64");
 
   return {
-    image: data.data[0].url
+    image: data.src
   }
 }
 

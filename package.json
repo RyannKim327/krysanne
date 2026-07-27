@@ -17,6 +17,7 @@
     "typescript": "^7.0.2"
   },
   "dependencies": {
+    "@heyputer/puter.js": "^2.5.4",
     "axios": "^1.18.1",
     "biblegateway-scrape": "^0.1.2",
     "cors": "^2.8.6",

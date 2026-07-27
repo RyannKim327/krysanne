@@ -25,7 +25,7 @@ export default async function script(body: aiResponse, api?: TelegramBot, event?
     delete store[user]
     gist(TELEGRAM, store)
 
-    api.deleteForumTopic(event.chat.id, event.message_thread_id as number)
+    api.deleteForumTopic(event.chat.id, event.reply_to_message?.message_thread_id as number)
 
     await api.editMessageText(`The thread ${event.reply_to_message?.forum_topic_created?.name} is now deleted`, {
       chat_id: message.chat.id,
