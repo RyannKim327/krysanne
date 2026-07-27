@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx tsx src",
-    "test": "npx tsx test"
+    "test": "npx tsx test/baybayin"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
   "dependencies": {
     "@heyputer/puter.js": "^2.5.4",
     "axios": "^1.18.1",
+    "baybayin-transliterator": "^0.0.4",
     "biblegateway-scrape": "^0.1.2",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
