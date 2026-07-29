@@ -567,6 +567,213 @@
         margin-left: 0;
       }
     }
+
+    /* Voice Call Banner Styles */
+    .call-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.25rem;
+      background: linear-gradient(135deg, rgba(16, 28, 20, 0.95) 0%, rgba(10, 15, 12, 0.95) 100%);
+      border-bottom: 1px solid rgba(34, 197, 94, 0.3);
+      box-shadow: 0 4px 20px rgba(34, 197, 94, 0.15);
+      backdrop-filter: blur(10px);
+      gap: 1rem;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 5;
+    }
+
+    .call-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .call-status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #22c55e;
+      box-shadow: 0 0 10px #22c55e;
+      animation: pulse-dot 1.5s infinite ease-in-out;
+      flex-shrink: 0;
+    }
+
+    .call-banner.speaking .call-status-dot {
+      background-color: #3b82f6;
+      box-shadow: 0 0 10px #3b82f6;
+    }
+
+    .call-banner.thinking .call-status-dot {
+      background-color: #eab308;
+      box-shadow: 0 0 10px #eab308;
+    }
+
+    .call-banner.muted .call-status-dot {
+      background-color: #ef4444;
+      box-shadow: 0 0 10px #ef4444;
+    }
+
+    @keyframes pulse-dot {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.25); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    .call-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .call-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .call-state-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
+    .call-timer {
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: #22c55e;
+      background: rgba(34, 197, 94, 0.1);
+      padding: 0.15rem 0.5rem;
+      border-radius: 6px;
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+
+    .call-live-transcript {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .call-audio-waves {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 20px;
+    }
+
+    .wave-bar {
+      width: 3px;
+      height: 6px;
+      background-color: #22c55e;
+      border-radius: 2px;
+      transition: height 0.1s ease;
+    }
+
+    .call-banner.speaking .wave-bar {
+      background-color: #3b82f6;
+      animation: wave-anim 0.8s infinite ease-in-out alternate;
+    }
+
+    .call-banner.listening .wave-bar {
+      background-color: #22c55e;
+      animation: wave-anim 0.6s infinite ease-in-out alternate;
+    }
+
+    .wave-bar:nth-child(1) { animation-delay: 0.1s; }
+    .wave-bar:nth-child(2) { animation-delay: 0.3s; }
+    .wave-bar:nth-child(3) { animation-delay: 0.5s; }
+    .wave-bar:nth-child(4) { animation-delay: 0.2s; }
+    .wave-bar:nth-child(5) { animation-delay: 0.4s; }
+
+    @keyframes wave-anim {
+      0% { height: 4px; }
+      100% { height: 22px; }
+    }
+
+    .call-banner-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .call-control-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.85rem;
+    }
+
+    .call-control-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: scale(1.05);
+    }
+
+    .call-control-btn.muted {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+      border-color: rgba(239, 68, 68, 0.4);
+    }
+
+    .call-control-btn.disabled {
+      opacity: 0.5;
+      color: var(--text-muted);
+    }
+
+    .call-control-btn.end-call-btn {
+      background: #dc2626;
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 0 12px rgba(220, 38, 38, 0.4);
+    }
+
+    .call-control-btn.end-call-btn:hover {
+      background: #b91c1c;
+      transform: scale(1.08);
+    }
+
+    .chat-action-btn.active-call {
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+      border-color: rgba(34, 197, 94, 0.5);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+      animation: pulse-btn 1.5s infinite alternate;
+    }
+
+    @keyframes pulse-btn {
+      0% { box-shadow: 0 0 4px rgba(34, 197, 94, 0.2); }
+      100% { box-shadow: 0 0 12px rgba(34, 197, 94, 0.6); }
+    }
+
+    .send-btn.recording {
+      background-color: #22c55e !important;
+      color: #000000 !important;
+      animation: pulse-recording 1.2s infinite ease-in-out;
+    }
+
+    @keyframes pulse-recording {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
   </style>
 </head>
 <body class="template-body">
@@ -612,11 +819,48 @@
           </div>
 
           <div class="chat-actions">
+            <button class="chat-action-btn" id="btn-call" title="Start Voice Call">
+              <i class="fa-solid fa-phone"></i>
+            </button>
             <button class="chat-action-btn" id="btn-clear" title="Clear Current Thread">
               <i class="fa-solid fa-rotate-left"></i>
             </button>
             <button class="chat-action-btn" id="btn-info" title="Info">
               <i class="fa-solid fa-circle-info"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Voice Call Active Banner -->
+        <div class="call-banner" id="call-banner" style="display: none;">
+          <div class="call-banner-left">
+            <div class="call-status-dot" id="call-status-dot"></div>
+            <div class="call-details">
+              <div class="call-title">
+                <span class="call-state-text" id="call-state-text">Voice Call Connected</span>
+                <span class="call-timer" id="call-timer">00:00</span>
+              </div>
+              <div class="call-live-transcript" id="call-live-transcript">
+                <i class="fa-solid fa-microphone"></i> <span id="transcript-text">Listening... Speak into your microphone</span>
+              </div>
+            </div>
+          </div>
+          <div class="call-audio-waves" id="call-audio-waves">
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+          </div>
+          <div class="call-banner-right">
+            <button class="call-control-btn" id="btn-mute-call" title="Mute/Unmute Mic">
+              <i class="fa-solid fa-microphone"></i>
+            </button>
+            <button class="call-control-btn" id="btn-speaker-call" title="Toggle Assistant Voice">
+              <i class="fa-solid fa-volume-high"></i>
+            </button>
+            <button class="call-control-btn end-call-btn" id="btn-end-call" title="End Voice Call">
+              <i class="fa-solid fa-phone-slash"></i>
             </button>
           </div>
         </div>
@@ -947,18 +1191,266 @@
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
       };
 
-      // Form submission handler
-      chatForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const text = chatInput.value.trim();
+      const btnCall = document.getElementById("btn-call");
+      const callBanner = document.getElementById("call-banner");
+      const callStatusDot = document.getElementById("call-status-dot");
+      const callStateText = document.getElementById("call-state-text");
+      const callTimerEl = document.getElementById("call-timer");
+      const transcriptTextEl = document.getElementById("transcript-text");
+      const btnMuteCall = document.getElementById("btn-mute-call");
+      const btnSpeakerCall = document.getElementById("btn-speaker-call");
+      const btnEndCall = document.getElementById("btn-end-call");
+
+      let isCallActive = false;
+      let isMuted = false;
+      let isSpeakerEnabled = true;
+      let isSpeaking = false;
+      let isProcessingMessage = false;
+      let isRecognitionActive = false;
+      let callTimerInterval = null;
+      let callSeconds = 0;
+      let sttRestartTimer = null;
+
+      // Play dual-tone AudioContext call chime
+      const playCallChime = (type = 'start') => {
+        try {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (!AudioCtx) return;
+          const ctx = new AudioCtx();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          
+          if (type === 'start') {
+            osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(659.25, ctx.currentTime + 0.15);
+            gain.gain.setValueAtTime(0.12, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.3);
+          } else {
+            osc.frequency.setValueAtTime(659.25, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(523.25, ctx.currentTime + 0.15);
+            gain.gain.setValueAtTime(0.12, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.3);
+          }
+        } catch (e) {
+          // AudioContext autoplay restricted until user gesture
+        }
+      };
+
+      const updateTimerDisplay = () => {
+        if (!callTimerEl) return;
+        const mins = Math.floor(callSeconds / 60).toString().padStart(2, '0');
+        const secs = (callSeconds % 60).toString().padStart(2, '0');
+        callTimerEl.textContent = `${mins}:${secs}`;
+      };
+
+      const updateCallUIState = (state, statusText) => {
+        if (!callBanner) return;
+        callBanner.classList.remove("listening", "speaking", "thinking", "muted");
+        callBanner.classList.add(state);
+
+        if (callStateText && statusText) {
+          callStateText.textContent = statusText;
+        }
+
+        if (state === "listening" && transcriptTextEl) {
+          transcriptTextEl.textContent = "Listening... Speak into your microphone";
+        }
+      };
+
+      const scheduleSTTRestart = (delayMs = 350) => {
+        if (sttRestartTimer) clearTimeout(sttRestartTimer);
+        sttRestartTimer = setTimeout(() => {
+          sttRestartTimer = null;
+          if (isCallActive && !isMuted && !isSpeaking && !isProcessingMessage && !isRecognitionActive) {
+            startSpeechToText();
+          }
+        }, delayMs);
+      };
+
+      // Voice List Loader for Chrome / Firefox / Edge
+      let loadedVoices = [];
+      const loadVoices = () => {
+        if (!('speechSynthesis' in window)) return;
+        loadedVoices = window.speechSynthesis.getVoices() || [];
+      };
+      loadVoices();
+      if ('speechSynthesis' in window && window.speechSynthesis.onvoiceschanged !== undefined) {
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+      }
+
+      // Web Speech Recognition (Speech-to-Text) Initialization
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      let recognition = null;
+
+      if (SpeechRecognition) {
+        recognition = new SpeechRecognition();
+        recognition.continuous = true; // Keep mic open continuously without rapid on-off cycling
+        recognition.interimResults = true;
+        recognition.lang = 'en-US';
+
+        recognition.onstart = () => {
+          isRecognitionActive = true;
+          updateCallUIState("listening", "Listening... Speak into microphone");
+        };
+
+        recognition.onresult = (event) => {
+          let interimText = '';
+          let finalText = '';
+
+          for (let i = event.resultIndex; i < event.results.length; ++i) {
+            if (event.results[i].isFinal) {
+              finalText += event.results[i][0].transcript;
+            } else {
+              interimText += event.results[i][0].transcript;
+            }
+          }
+
+          const textToShow = finalText || interimText;
+          if (textToShow && transcriptTextEl) {
+            transcriptTextEl.textContent = `You: "${textToShow}"`;
+          }
+
+          if (finalText.trim() && !isProcessingMessage) {
+            const userText = finalText.trim();
+            isProcessingMessage = true;
+            try { recognition.stop(); } catch(e) {}
+            processChatMessage(userText);
+          }
+        };
+
+        recognition.onerror = (event) => {
+          isRecognitionActive = false;
+          if (event.error === 'no-speech') {
+            scheduleSTTRestart(400);
+          } else if (event.error === 'not-allowed') {
+            alert("Microphone permission denied. Please allow microphone access in your browser settings.");
+            endCallMode();
+          } else {
+            scheduleSTTRestart(600);
+          }
+        };
+
+        recognition.onend = () => {
+          isRecognitionActive = false;
+          scheduleSTTRestart(400);
+        };
+      }
+
+      const startSpeechToText = () => {
+        if (!recognition) {
+          alert("Speech recognition is not supported in this browser. Please use Google Chrome, Edge, or Safari.");
+          endCallMode();
+          return;
+        }
+        if (isRecognitionActive || !isCallActive || isMuted || isSpeaking || isProcessingMessage) return;
+        try {
+          recognition.start();
+        } catch (e) {
+          console.warn("Recognition start skipped:", e);
+        }
+      };
+
+      // Text-To-Speech (TTS) Function - Guaranteed execution
+      const speakText = (text, callbackAfterFinish) => {
+        if (!('speechSynthesis' in window) || !isSpeakerEnabled) {
+          if (callbackAfterFinish) callbackAfterFinish();
+          return;
+        }
+
+        try {
+          if (window.speechSynthesis.paused) {
+            window.speechSynthesis.resume();
+          }
+          window.speechSynthesis.cancel();
+        } catch (e) {}
+
+        // Strip HTML & markdown for clean speech synthesis
+        const cleanText = text
+          .replace(/<[^>]*>/g, '')
+          .replace(/[*_#`~]/g, '')
+          .replace(/https?:\/\/\S+/g, 'link')
+          .trim();
+
+        if (!cleanText) {
+          if (callbackAfterFinish) callbackAfterFinish();
+          return;
+        }
+
+        // Small timeout allows browser TTS engine to reset after cancel()
+        setTimeout(() => {
+          try {
+            const utterance = new SpeechSynthesisUtterance(cleanText);
+            utterance.rate = 1.0;
+            utterance.pitch = 1.0;
+            utterance.lang = 'en-US';
+
+            if (!loadedVoices || loadedVoices.length === 0) {
+              loadVoices();
+            }
+
+            const preferredVoice = (loadedVoices || []).find(v => 
+              (v.name.includes("Google") || v.name.includes("Natural") || v.name.includes("Samantha") || v.name.includes("Zira")) && 
+              v.lang.startsWith("en")
+            );
+            if (preferredVoice) utterance.voice = preferredVoice;
+
+            utterance.onstart = () => {
+              isSpeaking = true;
+              updateCallUIState("speaking", "Krysanne is speaking...");
+              if (transcriptTextEl) transcriptTextEl.textContent = "Krysanne is speaking...";
+              if (recognition && isRecognitionActive) {
+                try { recognition.stop(); } catch(e) {}
+              }
+            };
+
+            let finished = false;
+            const handleEnd = () => {
+              if (finished) return;
+              finished = true;
+              isSpeaking = false;
+              if (callbackAfterFinish) callbackAfterFinish();
+            };
+
+            utterance.onend = handleEnd;
+            utterance.onerror = (e) => {
+              console.warn("TTS utterance error:", e);
+              handleEnd();
+            };
+
+            window.speechSynthesis.speak(utterance);
+
+            // Safety fallback timeout in case browser TTS event onend fails to fire
+            const estDurationMs = Math.max(2500, Math.min(30000, cleanText.length * 90));
+            setTimeout(() => {
+              if (isSpeaking) {
+                handleEnd();
+              }
+            }, estDurationMs);
+
+          } catch (err) {
+            console.error("SpeechSynthesis speak error:", err);
+            isSpeaking = false;
+            if (callbackAfterFinish) callbackAfterFinish();
+          }
+        }, 60);
+      };
+
+      // Process and Send Chat Message Pipeline
+      const processChatMessage = async (text) => {
         if (!text) return;
+        isProcessingMessage = true;
 
         let active = getActiveThread();
         if (!active) {
           active = createNewThread(false);
         }
 
-        // Auto update title if still default
         if (active.title === "New Thread" && active.messages.length === 0) {
           active.title = truncateTitle(text);
         }
@@ -973,13 +1465,14 @@
         saveThreads();
 
         appendUserMessageDOM(text, userTime);
-        chatInput.value = "";
+        if (chatInput) chatInput.value = "";
         renderThreadList();
         scrollToBottom();
 
         showTypingIndicator();
+        updateCallUIState("thinking", "Krysanne is thinking...");
+        if (transcriptTextEl) transcriptTextEl.textContent = "Processing message...";
 
-        // History subset sent to backend (only role & content)
         const historyForBackend = active.messages.slice(0, -1).map(m => ({
           role: m.role,
           content: m.content
@@ -989,9 +1482,7 @@
           const apiEndpoint = window.location.origin.includes("localhost") || window.location.origin.includes("127.0.0.1") || window.location.port ? "/api/chat" : "https://krysanne.onrender.com/api/chat";
           const response = await fetch(apiEndpoint, {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               message: text,
               history: historyForBackend
@@ -999,18 +1490,17 @@
           }).then(res => res.json());
 
           removeTypingIndicator();
+          let botContent = "I'm here for you.";
+          let botTime = getCurrentTime();
+          let imageUrl = null;
 
           if (response && response.extract && response.extract.message) {
-            const botTime = getCurrentTime();
-
             if (response.extract.command === "clear-chat") {
               clearCurrentThreadMessages();
             } else if (response.extract.command === "new-thread") {
-              // Remove the past request from old thread since it belongs in the new thread
               active.messages.pop();
-
-              const botContent = (response.src && response.src.text) ? response.src.text : response.extract.message;
-              const imageUrl = (response.src && response.src.image) ? response.src.image : null;
+              botContent = (response.src && response.src.text) ? response.src.text : response.extract.message;
+              imageUrl = (response.src && response.src.image) ? response.src.image : null;
               const newTitle = response.extract.title || truncateTitle(text);
               const newId = "thread_" + Date.now();
               const newThread = {
@@ -1019,17 +1509,8 @@
                 createdAt: Date.now(),
                 updatedAt: Date.now(),
                 messages: [
-                  {
-                    role: "user",
-                    content: text,
-                    time: userTime
-                  },
-                  {
-                    role: "assistant",
-                    content: botContent,
-                    image: imageUrl,
-                    time: botTime
-                  }
+                  { role: "user", content: text, time: userTime },
+                  { role: "assistant", content: botContent, image: imageUrl, time: botTime }
                 ]
               };
               threads.unshift(newThread);
@@ -1041,15 +1522,10 @@
               if (response.extract.title) {
                 active.title = response.extract.title;
                 titleSpan.textContent = response.extract.title;
-                messagesContainer.innerHTML += `
-                  <div class="message-divider">
-                    <span>Krysanne named the session • ${escapeHtml(response.extract.title)}</span>
-                  </div>
-                `;
               }
 
-              const botContent = (response.src && response.src.text) ? response.src.text : response.extract.message;
-              const imageUrl = (response.src && response.src.image) ? response.src.image : null;
+              botContent = (response.src && response.src.text) ? response.src.text : response.extract.message;
+              imageUrl = (response.src && response.src.image) ? response.src.image : null;
 
               active.messages.push({
                 role: "assistant",
@@ -1068,9 +1544,134 @@
             renderThreadList();
           }
           scrollToBottom();
+
+          isProcessingMessage = false;
+
+          // Automatically execute Text-To-Speech when on call, and execute Speech-To-Text right after TTS finishes!
+          if (isCallActive) {
+            speakText(botContent, () => {
+              // Call STT right after TTS executes and finishes!
+              scheduleSTTRestart(300);
+            });
+          }
+
         } catch (err) {
           removeTypingIndicator();
-          appendBotMessageDOM("I'm sorry, but I encountered a connection error. Please try again.", getCurrentTime());
+          isProcessingMessage = false;
+          const errorMsg = "I'm sorry, but I encountered a connection error. Please try again.";
+          appendBotMessageDOM(errorMsg, getCurrentTime());
+
+          if (isCallActive) {
+            speakText(errorMsg, () => {
+              scheduleSTTRestart(300);
+            });
+          }
+        }
+      };
+
+      // Call Mode Controls
+      const startCallMode = () => {
+        if (isCallActive) return;
+        if (!SpeechRecognition) {
+          alert("Speech recognition is not supported in this browser. Please use Google Chrome, Edge, or Safari.");
+          return;
+        }
+        isCallActive = true;
+        playCallChime('start');
+
+        if (btnCall) btnCall.classList.add("active-call");
+        if (callBanner) callBanner.style.display = "flex";
+
+        callSeconds = 0;
+        updateTimerDisplay();
+        clearInterval(callTimerInterval);
+        callTimerInterval = setInterval(() => {
+          callSeconds++;
+          updateTimerDisplay();
+        }, 1000);
+
+        updateCallUIState("listening", "Call connected • Listening...");
+        startSpeechToText();
+      };
+
+      const endCallMode = () => {
+        if (!isCallActive) return;
+        isCallActive = false;
+        playCallChime('end');
+
+        if (sttRestartTimer) clearTimeout(sttRestartTimer);
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+        if (recognition && isRecognitionActive) {
+          try { recognition.stop(); } catch(e) {}
+        }
+
+        if (btnCall) btnCall.classList.remove("active-call");
+        if (callBanner) callBanner.style.display = "none";
+
+        clearInterval(callTimerInterval);
+        callSeconds = 0;
+        isSpeaking = false;
+        isProcessingMessage = false;
+        isRecognitionActive = false;
+      };
+
+      const toggleCallMode = () => {
+        if (isCallActive) {
+          endCallMode();
+        } else {
+          startCallMode();
+        }
+      };
+
+      // Voice Call Buttons Event Listeners
+      if (btnCall) {
+        btnCall.addEventListener("click", toggleCallMode);
+      }
+
+      if (btnEndCall) {
+        btnEndCall.addEventListener("click", endCallMode);
+      }
+
+      if (btnMuteCall) {
+        btnMuteCall.addEventListener("click", () => {
+          isMuted = !isMuted;
+          btnMuteCall.classList.toggle("muted", isMuted);
+          btnMuteCall.innerHTML = isMuted ? `<i class="fa-solid fa-microphone-slash"></i>` : `<i class="fa-solid fa-microphone"></i>`;
+
+          if (isMuted) {
+            if (sttRestartTimer) clearTimeout(sttRestartTimer);
+            if (recognition && isRecognitionActive) { try { recognition.stop(); } catch(e) {} }
+            updateCallUIState("muted", "Microphone Muted");
+            if (transcriptTextEl) transcriptTextEl.textContent = "Microphone muted";
+          } else {
+            updateCallUIState("listening", "Listening... Speak into microphone");
+            startSpeechToText();
+          }
+        });
+      }
+
+      if (btnSpeakerCall) {
+        btnSpeakerCall.addEventListener("click", () => {
+          isSpeakerEnabled = !isSpeakerEnabled;
+          btnSpeakerCall.classList.toggle("disabled", !isSpeakerEnabled);
+          btnSpeakerCall.innerHTML = isSpeakerEnabled ? `<i class="fa-solid fa-volume-high"></i>` : `<i class="fa-solid fa-volume-xmark"></i>`;
+
+          if (!isSpeakerEnabled && isSpeaking) {
+            if (window.speechSynthesis) window.speechSynthesis.cancel();
+            isSpeaking = false;
+            if (isCallActive && !isMuted) {
+              scheduleSTTRestart(200);
+            }
+          }
+        });
+      }
+
+      // Form submission handler
+      chatForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const text = chatInput.value.trim();
+        if (text) {
+          processChatMessage(text);
         }
       });
 
@@ -1087,6 +1688,7 @@
 
       // New Thread Button
       newThreadBtn.addEventListener("click", () => {
+        if (isCallActive) endCallMode();
         createNewThread(true);
       });
 
@@ -1109,6 +1711,7 @@
         if (threadItem) {
           const targetId = threadItem.getAttribute("data-id");
           if (targetId && targetId !== activeThreadId) {
+            if (isCallActive) endCallMode();
             activeThreadId = targetId;
             saveThreads();
             renderThreadList();
