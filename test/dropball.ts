@@ -48,7 +48,9 @@ function test(n: number) {
       str += "\n"
       i++
       console.log(str)
-      _()
+      setTimeout(() => {
+        _()
+      }, 1500);
     }
   }
   _()

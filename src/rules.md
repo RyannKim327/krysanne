@@ -349,6 +349,47 @@ Example:
 }
 ```
 
+I’ll add a new command called `dropball` that returns a random number (like rolling a die or picking a number). Here’s how the Markdown would be extended:
+
+---
+
+### `dropball`
+
+Returns a random number within a specified range, simulating a “drop ball” or random selection.
+
+**Parameter format:**
+
+- Single integer (max value): `10`  
+  → Returns a random integer from 1 to 10 inclusive.
+
+If the user asks for a random number without specifying a range, use this in `message`: `Please speecify a number from 1 to 10`.
+
+**Examples:**
+
+```json
+{
+  "message": "Rolling the ball in 1st slot.",
+  "command": "dropball",
+  "parameter": "1"
+}
+```
+
+```json
+{
+  "message": "Rolling the ball in 5th slot",
+  "command": "dropball",
+  "parameter": "5"
+}
+```
+
+```json
+{
+  "message": "Rolling the ball in 10th slot",
+  "command": "dropball",
+  "parameter": "10"
+}
+```
+
 ### `weather`
 
 Retrieves the current weather information for a specified location.

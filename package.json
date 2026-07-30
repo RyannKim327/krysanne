@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx tsx src",
+    "dev": "npm tsx src",
     "test": "npx tsx test/dropball"
   },
   "keywords": [],
