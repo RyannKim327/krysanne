@@ -239,7 +239,7 @@ Example:
 ```
 
 
-### `rps0`
+### `rps`
 
 Starts a game of rock paper scissors. This is equivalent to executing the `rps` command in the host application.
 

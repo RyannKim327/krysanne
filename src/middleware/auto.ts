@@ -56,41 +56,39 @@ export default async function auto(api: TelegramBot, event: EventInterface, body
   // console.log(event)
 
   // TODO: Auto add script method
-  try {
-    if (src?.audio) {
-      api.sendAudio(event.chat.id, src.audio, {
-        message_thread_id: event.message_thread_id,
-        caption: src.text ?? ""
-      })
-    } else if (src?.image) {
-      api.sendPhoto(event.chat.id, src.image, {
-        message_thread_id: event.message_thread_id,
-        caption: src.text ?? ""
-      })
-    } else if (src?.video) {
-      api.sendVideo(event.chat.id, src.video, {
-        message_thread_id: event.message_thread_id,
-        caption: src.text ?? ""
-      })
-    } else if (src?.text) {
-      api.sendMessage(event.chat.id, src.text, {
-        message_thread_id: event.message_thread_id
-      })
-    } else if (extract.command === "new-thread") {
-      // Handled by new-thread script: created new topic and sent past request & response
-    } else {
-      // TODO: default callback
-      api.sendMessage(event.chat.id, extract.message, {
-        message_thread_id: event.message_thread_id
-      })
+  if (src?.audio) {
+    api.sendAudio(event.chat.id, src.audio, {
+      message_thread_id: event.message_thread_id,
+      caption: src.text ?? ""
+    })
+  } else if (src?.image) {
+    api.sendPhoto(event.chat.id, src.image, {
+      message_thread_id: event.message_thread_id,
+      caption: src.text ?? ""
+    })
+  } else if (src?.video) {
+    api.sendVideo(event.chat.id, src.video, {
+      message_thread_id: event.message_thread_id,
+      caption: src.text ?? ""
+    })
+  } else if (src?.text) {
+    api.sendMessage(event.chat.id, src.text, {
+      message_thread_id: event.message_thread_id
+    })
+  } else if (extract.command === "new-thread") {
+    // Handled by new-thread script: created new topic and sent past request & response
+  } else {
+    // TODO: default callback
+    api.sendMessage(event.chat.id, extract.message, {
+      message_thread_id: event.message_thread_id
+    })
 
-      // TODO: Thread Rename
-      if (extract.title) {
-        api.editForumTopic(event.chat.id, event.message_thread_id ?? 0, {
-          name: extract.title
-        })
-      }
+    // TODO: Thread Rename
+    if (extract.title) {
+      api.editForumTopic(event.chat.id, event.message_thread_id ?? 0, {
+        name: extract.title
+      })
     }
-  } catch (e) { }
+  }
 }
 
