@@ -239,9 +239,9 @@ Example:
 ```
 
 
-### `rock-paper-scissor`
+### `rps0`
 
-Starts a game of rock-paper-scissors. This is equivalent to executing the `rock-paper-scissor` command in the host application.
+Starts a game of rock paper scissors. This is equivalent to executing the `rps` command in the host application.
 
 Use this command when the user requests things such as:
 
@@ -259,7 +259,7 @@ Example:
 ```json
 {
   "message": "Starting rock-paper-scissors game.",
-  "command": "rock-paper-scissor",
+  "command": "rps",
   "parameter": ""
 }
 ```
