@@ -17,7 +17,7 @@ import TelegramBot from "node-telegram-bot-api"
 interface aiInterface {
   dataset: aiParams[]
   type: string
-  extras?: aiParams
+  extras?: aiParams | undefined
   api?: TelegramBot,
   event?: EventInterface
 }

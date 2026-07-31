@@ -15,29 +15,33 @@ export default async function script(body: aiResponse, api?: TelegramBot, event?
   if (api && event) {
     let user = event.from?.id.toString() || event.chat.id.toString()
 
-    const message = await api.sendMessage(event.chat.id, body.message)
-    const topic = event.reply_to_message?.forum_topic_created?.name
-    if (event.reply_to_message?.message_thread_id) {
-      user += `_${event.reply_to_message?.message_thread_id}`
+    const topic = event.reply_to_message?.forum_topic_created?.name ?? "Last Thread"
+    const message = await api.sendMessage(event.chat.id, `The thread ${topic} will be deleted after 3 seconds`)
+
+    if (event.message_thread_id) {
+      user += `_${event.message_thread_id}`
     }
 
     const store = await gist(TELEGRAM)
     delete store[user]
     gist(TELEGRAM, store)
 
-    api.deleteForumTopic(event.chat.id, event.reply_to_message?.message_thread_id as number)
+    if (event.message_thread_id) {
+      await setTimeout(() => {
+        api.deleteForumTopic(event.chat.id, event.message_thread_id as number)
+      }, 3000)
 
-    await api.editMessageText(`The thread ${topic} is now deleted`, {
-      chat_id: message.chat.id,
-      message_id: message.message_id
-    })
+      await api.editMessageText(`The thread "${topic}" is now deleted`, {
+        chat_id: message.chat.id,
+        message_id: message.message_id
+      })
+    }
 
     setTimeout(() => {
       api.deleteMessage(message.chat.id, message.message_id)
     }, 5000)
 
   }
-
   return {}
 }
 
