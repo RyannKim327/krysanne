@@ -16,7 +16,7 @@ export default async function script(body: aiResponse, api?: TelegramBot, event?
     let user = event.from?.id.toString() || event.chat.id.toString()
 
     const message = await api.sendMessage(event.chat.id, body.message)
-
+    const topic = event.reply_to_message?.forum_topic_created?.name
     if (event.reply_to_message?.message_thread_id) {
       user += `_${event.reply_to_message?.message_thread_id}`
     }
@@ -27,7 +27,7 @@ export default async function script(body: aiResponse, api?: TelegramBot, event?
 
     api.deleteForumTopic(event.chat.id, event.reply_to_message?.message_thread_id as number)
 
-    await api.editMessageText(`The thread ${event.reply_to_message?.forum_topic_created?.name} is now deleted`, {
+    await api.editMessageText(`The thread ${topic} is now deleted`, {
       chat_id: message.chat.id,
       message_id: message.message_id
     })

@@ -239,6 +239,32 @@ Example:
 ```
 
 
+### `rock-paper-scissor`
+
+Starts a game of rock-paper-scissors. This is equivalent to executing the `rock-paper-scissor` command in the host application.
+
+Use this command when the user requests things such as:
+
+- Play rock paper scissors
+- Let’s play rock paper scissors
+- Start rock paper scissors
+- Rock paper scissors game
+- Play RPS
+- Start RPS game
+
+Do **not** use this command when the user wants to play a different game or asks for rules only.
+
+Example:
+
+```json
+{
+  "message": "Starting rock-paper-scissors game.",
+  "command": "rock-paper-scissor",
+  "parameter": ""
+}
+```
+
+
 ### `audio-verse`
 
 Retrieves a single chapter of the bible.
