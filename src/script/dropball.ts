@@ -7,9 +7,11 @@ function addRow(width: number, n: number) {
     if (j === n) {
       str += "• "
     } else {
-      str += ": "
+      str += ". "
     }
   }
+  str += "\n"
+
   return `${str}\n`
 }
 
@@ -69,6 +71,27 @@ export default async function script(body: aiResponse, api?: TelegramBot, event?
     _()
     return {}
   } else {
+    for (let i = 0; i < height; i++) {
+      const random = Math.floor(Math.random() * width)
+
+      // TODO: Decision Process
+      if (n >= width - 1) {
+        n--
+      } else if (n <= 0) {
+        n++
+      } else {
+        if (random % 2 === 0) {
+          n++
+        } else {
+          n--
+        }
+      }
+
+      // TODO: Printing
+      const row = addRow(width, n)
+      str += row
+    }
+
     return {
       text: str
     }
