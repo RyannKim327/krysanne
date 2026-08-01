@@ -381,7 +381,7 @@ I’ll add a new command called `dropball` that returns a random number (like ro
 
 ### `dropball`
 
-Returns a random number within a specified range, simulating a “drop ball” or random selection.
+A game returns a random number within a specified range, simulating a “drop ball” or random selection.
 
 **Parameter format:**
 
