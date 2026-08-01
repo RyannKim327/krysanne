@@ -49,7 +49,6 @@ export default async function auto(api: TelegramBot, event: EventInterface, body
       message_thread_id: event.message_thread_id
     })
   } catch (e) {
-    await api.sendChatAction(event.chat.id, "typing")
   }
 
   // INFO: I let this log for debugging purposes

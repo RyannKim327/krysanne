@@ -48,11 +48,12 @@ export default async function script(body: aiResponse, api?: TelegramBot, event?
       }
 
       // TODO: Printing
-      str += addRow(width, n)
+      const row = addRow(width, n)
+      str += row
       i++
 
       if (event && api) {
-        api.editMessageText(str, {
+        api.editMessageText(row, {
           chat_id: event.chat.id,
           message_id: event.message_id
         })
