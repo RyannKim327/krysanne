@@ -38,13 +38,13 @@
         <h2>🌟 Key Features</h2>
         <ul>
           <li><strong>Empathetic Listening:</strong> Engineered to act as a supportive companion, offering active listening and a compassionate outlet for users.</li>
-          <li><strong>Persistent Chat Memory (GitHub Secret Gist):</strong> Retains conversational context securely per Telegram <code>chat.id</code> using a secure, private GitHub Secret Gist. This keeps data private and ensures chat history persists across server restarts.</li>
+          <li><strong>Persistent Chat Memory (GitHub Secret Gist):</strong> Retains conversational context securely per Telegram <code>chat.id</code> and thread using a nested JSON format (<code>{[event.chat.id]: {[event.message_thread_id]: []}}</code>) in a private GitHub Secret Gist. This keeps data private and ensures chat history persists across server restarts.</li>
           <li><strong>Data Encryption:</strong> An encryptor layer (utilizing the <code>json-enc-dec</code> package and <code>BOT_CODE</code> key) is currently prepared and will be fully applied in future updates to encrypt conversational logs in the Gist store, ensuring maximum cryptographic privacy.</li>
           <li><strong>Dynamic Command Routing:</strong> Commands generated in structured AI JSON responses are dynamically matched, imported, and executed from modular scripts in the <code>src/script/</code> directory.</li>
           <li><strong>Automated Cron Reminders & Daily Care:</strong> Built-in background task scheduler using <code>node-cron</code> (<code>Asia/Manila</code> timezone) that automatically delivers periodic hydration reminders throughout the day and sends inspirational daily Bible verses every morning.</li>
           <li><strong>Extensible Built-in Commands:</strong>
             <ul>
-              <li><code>clear-chat</code>: Resets/clears the conversational history for a fresh start.</li>
+              <li><code>clear-chat</code>: Resets/clears conversational history for a specific thread or all threads.</li>
               <li><code>verse</code>: Scrapes and retrieves motivational Bible verses based on user request/state.</li>
               <li><code>guitar</code>: Searches and fetches song lyrics and guitar chords when users want to play music.</li>
               <li><code>imgen</code>: Generates stunning images on the fly via the Lumenfall API.</li>

@@ -60,8 +60,8 @@
         <ul>
           <li><strong>GitHub Secret Gist Data Store:</strong> Conversation histories and Telegram identifiers are stored securely in a private, secure GitHub Gist (configured via <code>GIST_ID</code> and <code>GITHUB_TOKEN</code>). This data persists across server restarts so that your conversations are not lost.</li>
           <li><strong>No Centralized Database/Ad Profiling:</strong> We do not upload or save your chats to any centralized cloud database, profiling engine, or advertising network. The Gist remains private and fully under the control of the hosting administrator.</li>
-          <li><strong>Cryptographic Protection (Future Updates):</strong> To ensure ultimate confidentiality of the stored logs, an encryptor utilizing <code>json-enc-dec</code> is imported and will be applied in future updates. This will encrypt all conversational history contents written to the Gist store.</li>
-          <li><strong>User-Controlled Erasure:</strong> You have complete control over your data. You can delete your history at any time by triggering the <code>clear-chat</code> command (e.g., by asking the bot to reset or clear the chat history). This instantly removes your user entry and history from the GitHub Secret Gist.</li>
+          <li><strong>Cryptographic Protection:</strong> To ensure ultimate confidentiality of the stored logs, an encryptor utilizing <code>json-enc-dec</code> is imported and will be applied in future updates. This will encrypt all conversational history contents written to the Gist store.</li>
+          <li><strong>User-Controlled Erasure:</strong> You have complete control over your data. You can delete your history at any time by triggering the <code>clear-chat</code> command (e.g., by asking the bot to reset or clear the chat history for a specific thread or all threads). This instantly removes your specific thread entry or entire user chat history from the GitHub Secret Gist.</li>
         </ul>
 
         <h2>🏢 5. Third-Party Services</h2>

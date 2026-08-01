@@ -1496,7 +1496,12 @@
 
           if (response && response.extract && response.extract.message) {
             if (response.extract.command === "clear-chat") {
-              clearCurrentThreadMessages();
+              const param = (response.extract.parameter || "").toLowerCase().trim();
+              if (["all", "all-threads", "all_threads", "all threads", "everything"].includes(param)) {
+                clearAllThreadsMessages();
+              } else {
+                clearCurrentThreadMessages();
+              }
             } else if (response.extract.command === "new-thread") {
               active.messages.pop();
               botContent = (response.src && response.src.text) ? response.src.text : response.extract.message;
@@ -1745,6 +1750,14 @@
         }
       };
 
+      const clearAllThreadsMessages = () => {
+        threads = [];
+        createNewThread(false);
+        saveThreads();
+        renderThreadList();
+        renderActiveThreadMessages();
+      };
+
       if (clearBtn) {
         clearBtn.addEventListener("click", () => {
           clearCurrentThreadMessages();
@@ -1754,11 +1767,7 @@
       if (clearAllBtn) {
         clearAllBtn.addEventListener("click", () => {
           if (confirm("Are you sure you want to delete all thread history?")) {
-            threads = [];
-            createNewThread(false);
-            saveThreads();
-            renderThreadList();
-            renderActiveThreadMessages();
+            clearAllThreadsMessages();
           }
         });
       }

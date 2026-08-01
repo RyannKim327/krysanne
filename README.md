@@ -22,12 +22,12 @@
 ## 🌟 Key Features
 
 *   **Empathetic Listening:** Engineered to act as a supportive companion, offering active listening and a compassionate outlet for users.
-*   **Persistent Chat Memory (GitHub Secret Gist):** Retains conversational context securely per Telegram `chat.id` using a secure, private GitHub Secret Gist. This keeps data private and ensures chat history persists across server restarts.
+*   **Persistent Chat Memory (GitHub Secret Gist):** Retains conversational context securely per Telegram `chat.id` and thread using a nested JSON format (`{[event.chat.id]: {[event.message_thread_id]: []}}`) in a private GitHub Secret Gist. This keeps data private and ensures chat history persists across server restarts.
 *   **Data Encryption:** An encryptor layer (utilizing the `json-enc-dec` package and `BOT_CODE` key) is currently prepared and will be fully applied in future updates to encrypt conversational logs in the Gist store, ensuring maximum cryptographic privacy.
 *   **Dynamic Command Routing:** Commands generated in structured AI JSON responses are dynamically matched, imported, and executed from modular scripts in the `src/script/` directory.
 *   **Automated Cron Reminders & Daily Care:** Built-in background task scheduler using `node-cron` (`Asia/Manila` timezone) that automatically delivers periodic hydration reminders throughout the day and sends inspirational daily Bible verses every morning.
 *   **Extensible Built-in Commands:**
-    *   `clear-chat`: Resets/clears the conversational history for a fresh start.
+    *   `clear-chat`: Resets/clears conversational history for a specific thread or all threads.
     *   `verse`: Scrapes and retrieves motivational Bible verses based on user request/state.
     *   `guitar`: Searches and fetches song lyrics and guitar chords when users want to play music.
     *   `imgen`: Generates stunning images on the fly via the Lumenfall API.
@@ -182,7 +182,7 @@ krysanne/
 │   │   ├── core.ts     # Command-level event router (/start handler)
 │   │   └── auto.ts     # AI model integration & dynamic routing logic
 │   ├── script/         # Extensible command modules loaded dynamically on execution
-│   │   ├── clear-chat.ts # Reset and clear conversational history
+│   │   ├── clear-chat.ts # Reset and clear conversational history for a specific thread or all threads
 │   │   ├── guitar.ts   # Ultimate Guitar chords scraper
 │   │   ├── imgen.ts    # Lumenfall API image generator
 │   │   ├── new-thread.ts # Telegram forum topic creator
