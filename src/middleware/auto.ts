@@ -15,13 +15,20 @@ import gist from "@/utils/gist";
 dotenv.config()
 
 export default async function auto(api: TelegramBot, event: EventInterface, body: string) {
-  let user = event.from?.id.toString() || event.chat.id.toString()
+  const chatId = event.chat.id.toString()
+  const threadId = (event.message_thread_id ?? event.reply_to_message?.message_thread_id ?? 0).toString()
 
-  if (event.reply_to_message?.message_thread_id) {
-    user += `_${event.reply_to_message?.message_thread_id}`
+  const userGist = (await gist(TELEGRAM)) as Record<string, any> || {}
+
+  let threadDataset: aiParams[] = []
+  if (userGist[chatId] && typeof userGist[chatId] === "object" && !Array.isArray(userGist[chatId])) {
+    threadDataset = userGist[chatId][threadId] || []
+  } else if (Array.isArray(userGist[chatId])) {
+    threadDataset = userGist[chatId]
+  } else if (Array.isArray(userGist[`${chatId}_${threadId}`])) {
+    threadDataset = userGist[`${chatId}_${threadId}`]
+    delete userGist[`${chatId}_${threadId}`]
   }
-
-  const userGist = await gist(TELEGRAM)
 
   if (event.quote?.text) {
     body = `I am quoting to: "${event.quote.text}" referering to this message: ${event.reply_to_message?.text}\n\nNow ${body}`
@@ -30,7 +37,7 @@ export default async function auto(api: TelegramBot, event: EventInterface, body
   }
 
   const { messages, extract, src } = await artificialInteligence(body, event.chat.id, {
-    dataset: userGist[user],
+    dataset: threadDataset,
     type: "telegram",
     extras: (event.from?.username) ? {
       "role": "system",
@@ -40,9 +47,12 @@ export default async function auto(api: TelegramBot, event: EventInterface, body
     api: api
   })
 
-  userGist[user] = messages
+  if (typeof userGist[chatId] !== "object" || Array.isArray(userGist[chatId])) {
+    userGist[chatId] = {}
+  }
+  userGist[chatId][threadId] = messages
 
-  gist(TELEGRAM, userGist)
+  await gist(TELEGRAM, userGist)
 
   try {
     await api.sendChatAction(event.chat.id, "typing", {

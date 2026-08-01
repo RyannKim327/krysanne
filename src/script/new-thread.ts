@@ -31,9 +31,15 @@ export default async function script(body: aiResponse, api?: TelegramBot, event?
     });
 
     try {
-      const newThreadKey = `${event.chat.id}_${nt.message_thread_id}`;
-      const store = await gist(TELEGRAM);
-      store[newThreadKey] = [
+      const chatId = event.chat.id.toString();
+      const threadId = nt.message_thread_id.toString();
+      const store = (await gist(TELEGRAM)) as Record<string, any> || {};
+
+      if (typeof store[chatId] !== "object" || Array.isArray(store[chatId])) {
+        store[chatId] = {};
+      }
+
+      store[chatId][threadId] = [
         ...(pastRequestMessage ? [{ role: "user", content: pastRequestMessage }] : []),
         { role: "assistant", content: body.message }
       ];

@@ -213,11 +213,16 @@ Only use commands from this list. Never invent new commands.
 
 ### `clear-chat`
 
-Clears the current conversation. This is equivalent to **deleting the chat** in the host application.
+Clears conversation history for either the current thread or all threads in the chat.
+
+- Set `"parameter": "all"` if the user requests to clear all chats, reset all threads, or wipe everything in the chat.
+- Set `"parameter": "thread"` or `""` if the user requests to clear or reset only the current thread/conversation.
 
 Use this command when the user requests things such as:
 
-- Clear this chat
+- Clear this chat / thread
+- Reset all threads
+- Clear all chat history
 - Reset the conversation
 - Start over
 - New conversation
@@ -228,13 +233,23 @@ Use this command when the user requests things such as:
 
 Do **not** use this command when the user only wants to forget a single message or a specific piece of information.
 
-Example:
+Examples:
 
+Clear current thread:
 ```json
 {
-  "message": "Clearing the current conversation.",
+  "message": "Clearing the current thread.",
   "command": "clear-chat",
-  "parameter": ""
+  "parameter": "thread"
+}
+```
+
+Clear all threads:
+```json
+{
+  "message": "Clearing all chat threads.",
+  "command": "clear-chat",
+  "parameter": "all"
 }
 ```
 
