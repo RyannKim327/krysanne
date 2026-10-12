@@ -30,7 +30,7 @@ export default async function gist(filename: string, processData?: jsonInterface
       let pd: string | jsonInterface | jsonInterface[] = processData
 
       if (!filename.endsWith(".json")) {
-        pd = encrypt(pd, process.env.BOT_CODE) as string
+        pd = encrypt(pd, process.env.BOT_CODE as string) as string
       }
 
       // TODO: To convert from JSON to string
@@ -65,13 +65,13 @@ export default async function gist(filename: string, processData?: jsonInterface
       }
 
       if (!filename.endsWith(".json")) {
-        return decrypt(data.files[filename].content, process.env.BOT_CODE)
+        return decrypt(data.files[filename].content, process.env.BOT_CODE as string)
       }
 
       return JSON.parse(data.files[filename].content)
     }
   } catch (e) {
-    log(`GIST [${filename}]`, e.toString(), "e")
+    log(`GIST [${filename}]`, (e as Error).toString(), "e")
     return {}
   }
 }

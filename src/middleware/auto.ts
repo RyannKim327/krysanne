@@ -7,7 +7,7 @@
 
 import * as dotenv from "dotenv"
 import TelegramBot from "node-telegram-bot-api";
-import { EventInterface } from "@/interface";
+import { aiParams, EventInterface } from "@/interface";
 import { TELEGRAM } from "@/contants";
 import artificialInteligence from "./ai";
 import gist from "@/utils/gist";
