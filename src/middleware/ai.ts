@@ -22,6 +22,18 @@ interface aiInterface {
   event?: EventInterface
 }
 
+const models = [
+  "tencent/hy3",
+  "thinkingmachines/inkling:free",
+  "stealth/space-bunny-alpha",
+  "google/gemma-4-26b-a4b-it:free",
+  "google/gemma-4-26b-a4b-it",
+  "span-01-lite:free",
+  "span-01-lite",
+  "stealth/space-bunny-alpha:free",
+  "openrouter/free"
+]
+
 export default async function artificialInteligence(body: string, user: string | number, p: aiInterface): Promise<({ messages: aiParams[], extract: aiResponse, src?: ScriptInterface })> {
   const store = p.dataset
   const admins = await gist(ADMIN)
@@ -49,10 +61,11 @@ export default async function artificialInteligence(body: string, user: string |
 
   let data = null
 
+  let model = 0
   while (data === null) {
     try {
       const response = await axios.post("https://openrouter.ai/api/v1/chat/completions", {
-        "model": "google/gemma-4-26b-a4b-it:free",
+        "model": models[model],
         "messages": messages,
         "stream": false
       }, {
@@ -65,6 +78,7 @@ export default async function artificialInteligence(body: string, user: string |
     } catch (e: unknown) {
       log("AI Response", e?.toString() ?? "Error", "e")
     }
+    model++
   }
 
   const extract: aiResponse = mdExtractor(data as string) as aiResponse
