@@ -30,7 +30,14 @@ function main() {
 
   try {
     const app: Express = express()
-    app.use(cors())
+    app.use(cors({
+      origin: [
+        'http://localhost:3000',
+        'https://ryannkim327/is-a.dev/krysanne'
+      ],
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
+    }))
     app.use(express.json())
 
     // Serve static files from the template directory under the /template path
